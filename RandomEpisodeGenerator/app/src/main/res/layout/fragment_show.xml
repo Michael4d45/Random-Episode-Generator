@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/show_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="show_fragment" />
+        android:text="@string/title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/show_info">
+
+        <TextView
+            android:id="@+id/show_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/description" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/season_recycler_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </LinearLayout>
