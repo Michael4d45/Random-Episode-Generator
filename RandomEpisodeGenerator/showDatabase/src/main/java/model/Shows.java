@@ -6,13 +6,11 @@ import java.util.Vector;
 
 public class Shows
 {
-	private Vector<Show> shows;
 	private Map<String, Show> showsMap;
 	private static Shows sShows;
 
 	private Shows()
 	{
-		shows = new Vector<>();
 		showsMap = new TreeMap<>();
 	}
 
@@ -23,17 +21,11 @@ public class Shows
 		return sShows;
 	}
 
-	public Vector<Show> getShow()
-	{
-		return shows;
-	}
-
 	public boolean add(String title)
 	{
 		if(title == null || title.equals("") || showsMap.containsKey(title))
 			return false;
 		Show show = new Show(title);
-		shows.add(show);
 		showsMap.put(title,show);
 		return true;
 	}
@@ -45,18 +37,20 @@ public class Shows
 
 	public Show getRandomShow()
 	{
+		Vector<Show> shows = getShows();
 		return shows.elementAt((int) (shows.size() * Math.random()));
 	}
 
 	public Vector<Show> getShows()
 	{
-		return shows;
+		return new Vector<Show>(showsMap.values());
 	}
 
 	public boolean remove(String show)
 	{
 		if(show == null || show.equals("") || !showsMap.containsKey(show))
 			return false;
-		return shows.remove(showsMap.remove(show));
+		showsMap.remove(show);
+		return true;
 	}
 }

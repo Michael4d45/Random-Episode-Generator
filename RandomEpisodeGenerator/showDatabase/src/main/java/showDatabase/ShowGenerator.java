@@ -15,6 +15,11 @@ public class ShowGenerator
 {
 	private static Shows shows = Shows.get();
 
+	/**
+	 * this is probably the worst case scenario of nesting, but
+	 * I don't really care
+	 * @param args no purpose
+	 */
 	public static void main(String[] args)
 	{
 		String input = "";
@@ -40,28 +45,22 @@ public class ShowGenerator
 					case "add":
 						System.out.println("which show?");
 						input = br.readLine();
-						show = shows.getShow(input);
-						if (show != null)
+						if (!shows.add(input))
 						{
 							System.out.println("show already exists");
 							break;
 						}
-						shows.add(input);
 						show = shows.getShow(input);
 						System.out.println("add a description");
 						show.setDescription(br.readLine());
 						System.out.println("how many seasons?");
-						input = "";
-						while (!input.matches("[0-9]+") && !input.equals("end"))
-							input = br.readLine();
+						input = getNumber(br);
 						if (input.equals("end"))
 							break;
 
-						Set<Season> seasons = show.createSeasons(Integer.parseInt(input));
+						Vector<Season> seasons = show.createSeasons(Integer.parseInt(input));
 						for (Season season : seasons)
-						{
 							addSeason(season, br);
-						}
 						break;
 					case "edit":
 						System.out.println("you have these shows:");
@@ -78,9 +77,10 @@ public class ShowGenerator
 								System.out.println("\tadd a season? (add)");
 								System.out.println("\tlist season? (list)");
 								System.out.println("\tedit a season? (edit)");
-								System.out.println("\tfinish editing? (done)");
+								System.out.println("\tremove a season? (remove)");
 								System.out.println("\tchange show title? (title)");
 								System.out.println("\tchange show description? (description)");
+								System.out.println("\tfinish editing? (done)");
 								System.out.println("\tleave? (end)");
 								input = br.readLine();
 								Season season = null;
@@ -88,8 +88,7 @@ public class ShowGenerator
 								{
 									case "add":
 										System.out.println("which season?");
-										while (!input.matches("[0-9]+") && !input.equals("end"))
-											input = br.readLine();
+										input = getNumber(br);
 										if (input.equals("end"))
 											break;
 										season = new Season(Integer.parseInt(input));
@@ -102,8 +101,7 @@ public class ShowGenerator
 										System.out.println("you have these seasons:");
 										System.out.println(show.getSeasons().toString());
 										System.out.println("which season?");
-										while (!input.matches("[0-9]+") && !input.equals("end"))
-											input = br.readLine();
+										input = getNumber(br);
 										if (input.equals("end"))
 											break;
 										season = show.getSeason(Integer.parseInt(input));
@@ -120,6 +118,7 @@ public class ShowGenerator
 											System.out.println("\tadd a episode? (add)");
 											System.out.println("\tlist episodes? (list)");
 											System.out.println("\tedit a episode? (edit)");
+											System.out.println("\tremove a episode? (remove)");
 											System.out.println("\tchange season number? (number)");
 											System.out.println("\tfinish editing? (done)");
 											System.out.println("\tleave? (end)");
@@ -129,8 +128,7 @@ public class ShowGenerator
 											{
 												case "add":
 													System.out.println("which episode?");
-													while (!input.matches("[0-9]+") && !input.equals("end"))
-														input = br.readLine();
+													input = getNumber(br);
 													if (input.equals("end"))
 														break;
 													episode = new Episode(Integer.parseInt(input));
@@ -141,8 +139,7 @@ public class ShowGenerator
 													break;
 												case "edit":
 													System.out.println("which episode?");
-													while (!input.matches("[0-9]+") && !input.equals("end"))
-														input = br.readLine();
+													input = getNumber(br);
 													if (input.equals("end"))
 														break;
 													episode = season.getEpisode(Integer.parseInt(input));
@@ -172,8 +169,7 @@ public class ShowGenerator
 																	break;
 																case "number":
 																	System.out.println("change number to...");
-																	while (!input.matches("[0-9]+") && !input.equals("end"))
-																		input = br.readLine();
+																	input = getNumber(br);
 																	if (input.equals("end"))
 																		break;
 																	int newNumber = Integer.parseInt(input);
@@ -198,13 +194,21 @@ public class ShowGenerator
 													break;
 												case "number":
 													System.out.println("change number to...");
-													while (!input.matches("[0-9]+") && !input.equals("end"))
-														input = br.readLine();
+													input = getNumber(br);
 													if (input.equals("end"))
 														break;
 													int newNumber = Integer.parseInt(input);
 													if (!show.changeNumber(season, newNumber))
 														System.out.println("could not do that");
+													break;
+												case "remove":
+													System.out.println("which episode?:");
+													System.out.println(shows.getShows().toString());
+													input = getNumber(br);
+													if (input.equals("end"))
+														break;
+													if(!season.remove(Integer.parseInt(input)))
+														System.out.println("could not remove that");
 													break;
 												case "end":
 													System.out.println("goodbye");
@@ -231,6 +235,15 @@ public class ShowGenerator
 										System.out.println("change description to...");
 										input = br.readLine();
 										show.setDescription(input);
+										break;
+									case "remove":
+										System.out.println("which season?:");
+										System.out.println(shows.getShows().toString());
+										input = getNumber(br);
+										if (input.equals("end"))
+											break;
+										if(!show.remove(Integer.parseInt(input)))
+											System.out.println("could not remove that");
 										break;
 									case "end":
 										System.out.println("goodbye");
@@ -284,19 +297,24 @@ public class ShowGenerator
 		}
 	}
 
+	private static String getNumber(BufferedReader br) throws IOException
+	{
+		String input = "";
+		while (!input.matches("[0-9]+") && !input.equals("end"))
+			input = br.readLine();
+		return input;
+	}
+
 	private static void addSeason(Season season, BufferedReader br) throws IOException
 	{
 		String input = "";
 		System.out.println("how many episodes for season " + season.getSeasonNum() + "?");
-		while (!input.matches("[0-9]+") && !input.equals("end"))
-			input = br.readLine();
+		input = getNumber(br);
 		if (input.equals("end"))
 			return;
-		Set<Episode> episodes = season.createEpisodes(Integer.parseInt(input));
+		Vector<Episode> episodes = season.createEpisodes(Integer.parseInt(input));
 		for (Episode episode : episodes)
-		{
 			addEpisode(episode, br);
-		}
 	}
 
 	private static void addEpisode(Episode episode, BufferedReader br) throws IOException

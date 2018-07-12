@@ -11,7 +11,6 @@ public class Season implements Comparable
 	private int seasonNum = 0;
 	private String description = "";
 
-	private Set<Episode> episodes = new TreeSet<>();
 	private Map<Integer,Episode> episodesMap = new TreeMap<>();
 
 	public Season(int i)
@@ -20,9 +19,9 @@ public class Season implements Comparable
 	}
 
 
-	public Set<Episode> getEpisodes()
+	public Vector<Episode> getEpisodes()
 	{
-		return episodes;
+		return new Vector<Episode>(episodesMap.values());
 	}
 
 	public int getSeasonNum()
@@ -61,27 +60,25 @@ public class Season implements Comparable
 		s.append("Season ");
 		s.append(seasonNum);
 		s.append("\n");
-		for (Episode episode : episodes)
+		for (Episode episode : getEpisodes())
 			s.append(episode.toString());
 		return s.toString();
 	}
 
-	public Set<Episode> createEpisodes(int numEpisodes)
+	public Vector<Episode> createEpisodes(int numEpisodes)
 	{
 		for(int i = 1; i <= numEpisodes; i++)
 		{
 			Episode episode = new Episode(i);
-			episodes.add(episode);
 			episodesMap.put(i,episode);
 		}
-		return episodes;
+		return getEpisodes();
 	}
 
 	public boolean addEpisode(Episode episode)
 	{
 		if(episode == null || episodesMap.containsKey(episode.getEpisodeNum()))
 			return false;
-		episodes.add(episode);
 		episodesMap.put(episode.getEpisodeNum(),episode);
 		return true;
 	}
@@ -95,10 +92,8 @@ public class Season implements Comparable
 	{
 		if(episode == null || episodesMap.containsKey(newNumber) || !episodesMap.containsKey(episode.getEpisodeNum()))
 			return false;
-		episodes.remove(episode);
 		episodesMap.remove(episode.getEpisodeNum());
 		episode.setNumber(newNumber);
-		episodes.add(episode);
 		episodesMap.put(newNumber,episode);
 
 		return true;
@@ -111,7 +106,16 @@ public class Season implements Comparable
 
 	public Episode getRandomEpisode()
 	{
-		Vector<Integer> keys = new Vector<>(episodesMap.keySet());
-		return episodesMap.get(keys.elementAt((int) (Math.random() * keys.size())));
+		Vector<Episode> episodes = getEpisodes();
+		return episodes.elementAt((int) (Math.random() * episodes.size()));
+	}
+
+	public boolean remove(int i)
+	{
+		if (!episodesMap.containsKey(i))
+			return false;
+		episodesMap.remove(i);
+
+		return true;
 	}
 }
