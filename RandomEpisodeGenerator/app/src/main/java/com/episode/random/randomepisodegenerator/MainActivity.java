@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity
 {
 	FragmentManager fm;
 	Fragment fragment;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -30,30 +31,36 @@ public class MainActivity extends AppCompatActivity
 		if (fragment == null)
 		{
 			fragment = new MainFragment();
-			fm.beginTransaction().add(R.id.mainFragmentContainer,fragment).commit();
+			fm.beginTransaction().add(R.id.mainFragmentContainer, fragment).commit();
 		}
 	}
 
 	public void switchToShow(Show show)
 	{
 		fragment = ShowFragment.newInstance(show);
-		fm.beginTransaction().replace(R.id.mainFragmentContainer,fragment).addToBackStack( "show" ).commit();
+		fm.beginTransaction().replace(R.id.mainFragmentContainer, fragment).addToBackStack("show").commit();
 	}
 
 	public void switchToShowSelect()
 	{
 		fragment = new ShowSelectFragment();
-		fm.beginTransaction().replace(R.id.mainFragmentContainer,fragment).addToBackStack( "select" ).commit();
+		fm.beginTransaction().replace(R.id.mainFragmentContainer, fragment).addToBackStack("select").commit();
 	}
 
-	public void switchToRandomEpisode()
+	public void switchToRandomShow()
 	{
 		fragment = ShowFragment.newRandomInstance();
-		fm.beginTransaction().replace(R.id.mainFragmentContainer,fragment).addToBackStack( "tag" ).commit();
+		fm.beginTransaction().replace(R.id.mainFragmentContainer, fragment).addToBackStack("tag").commit();
 	}
 
 	public void switchToEdit()
 	{
 
+	}
+
+	public void switchToEpisode(Episode episode)
+	{
+		fragment = EpisodeFragment.newInstance(episode);
+		fm.beginTransaction().replace(R.id.mainFragmentContainer, fragment).addToBackStack("tag").commit();
 	}
 }

@@ -16,7 +16,16 @@ public class Shows
 		{
 			Show show =  new Show("bob " + i);
 			show.setDescription("a bob description" + i);
-
+			Vector<Season> seasons = show.createSeasons(2);
+			for(Season season:seasons)
+			{
+				Vector<Episode> episodes = season.createEpisodes(2);
+				for(Episode episode: episodes)
+				{
+					episode.setDescription("some description"+i);
+					episode.setTitle("some title"+i);
+				}
+			}
 			showsMap.put(("bob" + i),show);
 		}
 	}

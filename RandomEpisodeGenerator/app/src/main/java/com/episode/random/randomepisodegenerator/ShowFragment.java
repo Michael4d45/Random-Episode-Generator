@@ -1,20 +1,23 @@
 package com.episode.random.randomepisodegenerator;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Vector;
 
+import model.Episode;
 import model.Season;
 import model.Show;
 import model.Shows;
@@ -127,18 +130,75 @@ public class ShowFragment extends Fragment
 		TextView seasonNumber;
 		GridView episodeGrid;
 		Season season;
+		Vector<Episode> episodes;
 
 		SeasonHolder(LayoutInflater inflater, ViewGroup parent)
 		{
 			super(inflater.inflate(R.layout.season_recycler, parent, false));
 			seasonNumber = (TextView) itemView.findViewById(R.id.season_number);
 			episodeGrid = (GridView) itemView.findViewById(R.id.episode_grid_container);
+			episodes = season.getEpisodes();
+			episodeGrid.setAdapter(new EpisodeAdapter(getContext(),episodes));
 
+
+			episodeGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+				public void onItemClick(AdapterView<?> parent, View v,
+										int position, long id) {
+					((MainActivity) getActivity()).switchToEpisode(episodes.elementAt(position));
+				}
+			});
 		}
 
 		public void bind(final Season season)
 		{
 			this.season = season;
 		}
+
+		class EpisodeAdapter extends BaseAdapter
+		{
+			private Vector<Episode> episodes;
+			private Context mContext;
+
+			EpisodeAdapter(Context c ,Vector<Episode> episodes)
+			{
+				this.episodes = episodes;
+				this.mContext = c;
+			}
+
+			public int getCount()
+			{
+				return episodes.size();
+			}
+
+			public Object getItem(int position)
+			{
+				return null;
+			}
+
+			public long getItemId(int position)
+			{
+				return 0;
+			}
+
+			// create a new ImageView for each item referenced by the Adapter
+			public View getView(int position, View convertView, ViewGroup parent)
+			{
+				TextView episodeLayout;
+				if (convertView == null)
+				{
+					// if it's not recycled, initialize some attributes
+					episodeLayout = new TextView(mContext);
+				}
+				else
+				{
+					episodeLayout = (TextView) convertView;
+				}
+				episodeLayout.setText(episodes.elementAt(position).getEpisodeNum());
+				return episodeLayout;
+			}
+
+		}
 	}
+
+
 }
