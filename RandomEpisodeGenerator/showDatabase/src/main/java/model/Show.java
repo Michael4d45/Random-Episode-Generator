@@ -105,4 +105,23 @@ public class Show implements Serializable
 	{
 		return title;
 	}
+
+	public String getInfo()
+	{
+		StringBuilder s = new StringBuilder();
+		s.append(seasonsMap.keySet().size());
+		s.append(" seasons; ");
+		int numEpisodes = 0;
+		for (Season season : getSeasons())
+			numEpisodes += season.getNumEpisodes();
+		s.append(numEpisodes);
+		s.append(" episodes");
+
+		return s.toString();
+	}
+
+	public String getDescription()
+	{
+		return description;
+	}
 }

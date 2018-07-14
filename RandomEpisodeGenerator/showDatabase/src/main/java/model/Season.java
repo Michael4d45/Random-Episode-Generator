@@ -1,12 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
 
-public class Season implements Comparable
+public class Season implements Serializable
 {
 	private int seasonNum = 0;
 	private String description = "";
@@ -32,16 +33,6 @@ public class Season implements Comparable
 	public String getDescription()
 	{
 		return description;
-	}
-
-	public int compareTo(Object o)
-	{
-		if (!(o instanceof Season))
-			return -1;
-
-		Season compareTo = (Season) o;
-
-		return Integer.compare(seasonNum, compareTo.seasonNum);
 	}
 
 	@Override
@@ -117,5 +108,10 @@ public class Season implements Comparable
 		episodesMap.remove(i);
 
 		return true;
+	}
+
+	public int getNumEpisodes()
+	{
+		return episodesMap.keySet().size();
 	}
 }

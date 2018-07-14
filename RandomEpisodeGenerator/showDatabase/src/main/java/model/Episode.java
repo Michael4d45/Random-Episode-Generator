@@ -1,6 +1,8 @@
 package model;
 
-public class Episode implements Comparable
+import java.io.Serializable;
+
+public class Episode implements Serializable
 {
 	private String title = "";
 	private String description = "";
@@ -24,17 +26,6 @@ public class Episode implements Comparable
 	public int getEpisodeNum()
 	{
 		return episodeNum;
-	}
-
-
-	public int compareTo(Object o)
-	{
-		if (!(o instanceof Episode))
-			return -1;
-
-		Episode compareTo = (Episode) o;
-
-		return Integer.compare(episodeNum, compareTo.episodeNum);
 	}
 
 	@Override

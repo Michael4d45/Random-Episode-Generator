@@ -1,56 +1,33 @@
 package com.episode.random.randomepisodegenerator;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.Vector;
+
+import model.Show;
+import model.Shows;
 
 
 public class ShowSelectFragment extends Fragment
 {
-	// TODO: Rename parameter arguments, choose names that match
-	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-	private static final String ARG_PARAM1 = "param1";
-	private static final String ARG_PARAM2 = "param2";
-
-	// TODO: Rename and change types of parameters
-	private String mParam1;
-	private String mParam2;
 
 	public ShowSelectFragment()
 	{
 		// Required empty public constructor
 	}
 
-	/**
-	 * Use this factory method to create a new instance of
-	 * this fragment using the provided parameters.
-	 *
-	 * @param param1 Parameter 1.
-	 * @param param2 Parameter 2.
-	 * @return A new instance of fragment ShowSelectFragment.
-	 */
-	// TODO: Rename and change types and number of parameters
-	public static ShowSelectFragment newInstance(String param1, String param2)
-	{
-		ShowSelectFragment fragment = new ShowSelectFragment();
-		Bundle args = new Bundle();
-		args.putString(ARG_PARAM1, param1);
-		args.putString(ARG_PARAM2, param2);
-		fragment.setArguments(args);
-		return fragment;
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		if (getArguments() != null)
-		{
-			mParam1 = getArguments().getString(ARG_PARAM1);
-			mParam2 = getArguments().getString(ARG_PARAM2);
-		}
 	}
 
 	@Override
@@ -58,6 +35,80 @@ public class ShowSelectFragment extends Fragment
 							 Bundle savedInstanceState)
 	{
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_show_choice, container, false);
+		View v = inflater.inflate(R.layout.fragment_show_select, container, false);
+
+
+		RecyclerView showRecyclerView = (RecyclerView) v.findViewById(R.id.show_recycler_container);
+		showRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+		Vector<Show> shows = Shows.get().getShows();
+
+		ShowAdapter showAdapter = new ShowAdapter(shows);
+		showRecyclerView.setAdapter(showAdapter);
+
+		return v;
 	}
+
+
+	private class ShowAdapter extends RecyclerView.Adapter<ShowHolder>
+	{
+		private Vector<Show> shows;
+
+		ShowAdapter(Vector<Show> shows)
+		{
+			this.shows = shows;
+		}
+
+		@NonNull
+		@Override
+		public ShowHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
+		{
+			LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+			return new ShowHolder(layoutInflater, viewGroup);
+		}
+
+		@Override
+		public int getItemCount()
+		{
+			return shows.size();
+		}
+
+		@Override
+		public void onBindViewHolder(@NonNull ShowHolder showHolder, int position)
+		{
+			showHolder.bind(shows.elementAt(position));
+		}
+	}
+
+	private class ShowHolder extends RecyclerView.ViewHolder
+	{
+		TextView title;
+		TextView info;
+		View view;
+		Show show;
+
+		ShowHolder(LayoutInflater inflater, ViewGroup parent)
+		{
+			super(inflater.inflate(R.layout.recycler_show, parent, false));
+			title = (TextView) itemView.findViewById(R.id.show_title);
+			info = (TextView) itemView.findViewById(R.id.show_info);
+			view = (View) itemView.findViewById(R.id.show_info_view);
+			view.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View view)
+				{
+					((MainActivity) getActivity()).switchToShow(show);
+				}
+			});
+		}
+
+		public void bind(final Show show)
+		{
+			this.show = show;
+			title.setText(show.getTitle());
+			info.setText(show.getInfo());
+		}
+	}
+
 }

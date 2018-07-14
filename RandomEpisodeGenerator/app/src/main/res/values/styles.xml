@@ -8,10 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MainButton">
-        <item name="android:layout_gravity">center</item>
+    <style name="Text">
         <item name="android:textSize">20sp</item>
         <item name="android:layout_margin">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="MainButton" parent="Text">
+        <item name="android:layout_gravity">center</item>
     </style>
 
 </resources>

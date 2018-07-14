@@ -8,22 +8,16 @@
     <Button
         style="@style/MainButton"
         android:id="@+id/select_show_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/select_show" />
 
     <Button
         style="@style/MainButton"
         android:id="@+id/random_show_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/random_show" />
 
     <Button
         style="@style/MainButton"
         android:id="@+id/edit_show_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/edit_database" />
 
 </LinearLayout>

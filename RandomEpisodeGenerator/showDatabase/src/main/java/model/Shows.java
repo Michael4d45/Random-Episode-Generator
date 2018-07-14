@@ -12,6 +12,13 @@ public class Shows
 	private Shows()
 	{
 		showsMap = new TreeMap<>();
+		for(int i = 0; i < 1000; i++)
+		{
+			Show show =  new Show("bob " + i);
+			show.setDescription("a bob description" + i);
+
+			showsMap.put(("bob" + i),show);
+		}
 	}
 
 	public static Shows get()
@@ -38,6 +45,8 @@ public class Shows
 	public Show getRandomShow()
 	{
 		Vector<Show> shows = getShows();
+		if(shows.isEmpty())
+			return null;
 		return shows.elementAt((int) (shows.size() * Math.random()));
 	}
 
