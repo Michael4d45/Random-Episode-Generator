@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/show_title"
+                    style="@style/Text"
+                    android:text="@string/title" />
+
+                <Button
+                    android:id="@+id/random_episode_button"
+                    style="@style/MainButton"
+                    android:text="@string/random_episode" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/show_description"
+                style="@style/Text"
+                android:text="@string/description" />
+        </LinearLayout>
+
+        <View
+            android:layout_height="match_parent"
+            android:layout_width="@dimen/bar"
+            android:background="@color/bar" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/season_episode_number"
+                style="@style/EpisodeText"
+                android:text="@string/season_episode_number" />
+
+            <TextView
+                android:id="@+id/episode_title"
+                style="@style/EpisodeText"
+                android:text="@string/title" />
+
+            <TextView
+                android:id="@+id/episode_description"
+                style="@style/EpisodeText"
+                android:text="@string/description" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bar"
+        android:background="@color/bar" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/season_recycler_container"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bar"
+        android:background="@color/bar" />
+
+</LinearLayout>

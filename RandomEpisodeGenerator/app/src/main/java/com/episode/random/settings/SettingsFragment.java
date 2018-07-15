@@ -1,25 +1,33 @@
-package com.episode.random.randomepisodegenerator;
+package com.episode.random.settings;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import com.episode.random.randomepisodegenerator.MainActivity;
+import com.episode.random.randomepisodegenerator.MainFragment;
+import com.episode.random.randomepisodegenerator.R;
 
 import java.util.Vector;
 
 import model.Show;
 import model.Shows;
 
-
-public class ShowSelectFragment extends Fragment
+public class SettingsFragment extends Fragment
 {
-
-	public ShowSelectFragment()
+	public SettingsFragment()
 	{
 		// Required empty public constructor
 	}
@@ -35,13 +43,12 @@ public class ShowSelectFragment extends Fragment
 							 Bundle savedInstanceState)
 	{
 		// Inflate the layout for this fragment
-		View v = inflater.inflate(R.layout.fragment_show_select, container, false);
+		View v = inflater.inflate(R.layout.fragment_settings, container, false);
 
-
-		RecyclerView showRecyclerView = (RecyclerView) v.findViewById(R.id.show_recycler_container);
+		RecyclerView showRecyclerView = (RecyclerView) v.findViewById(R.id.show_settings_recycler_container);
 		showRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-		Vector<Show> shows = Shows.get().getShows();
+		Vector<Show> shows = Shows.get().getAllShows();
 
 		ShowAdapter showAdapter = new ShowAdapter(shows);
 		showRecyclerView.setAdapter(showAdapter);
@@ -82,23 +89,30 @@ public class ShowSelectFragment extends Fragment
 
 	private class ShowHolder extends RecyclerView.ViewHolder
 	{
-		TextView title;
-		TextView info;
-		View view;
+		Button title;
+		Switch isIncluded;
 		Show show;
 
 		ShowHolder(LayoutInflater inflater, ViewGroup parent)
 		{
-			super(inflater.inflate(R.layout.recycler_show, parent, false));
-			title = (TextView) itemView.findViewById(R.id.show_title);
-			info = (TextView) itemView.findViewById(R.id.show_info);
-			view = (View) itemView.findViewById(R.id.show_info_view);
-			view.setOnClickListener(new View.OnClickListener()
+			super(inflater.inflate(R.layout.recycler_show_settings, parent, false));
+			title = (Button) itemView.findViewById(R.id.show_title_button);
+			isIncluded = (Switch) itemView.findViewById(R.id.show_included);
+			isIncluded.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+			{
+				@Override
+				public void onCheckedChanged(CompoundButton compoundButton, boolean b)
+				{
+					show.setIncluded(b);
+				}
+			});
+
+			title.setOnClickListener(new View.OnClickListener()
 			{
 				@Override
 				public void onClick(View view)
 				{
-					((MainActivity) getActivity()).switchToShow(show);
+					((SettingsActivity) getActivity()).switchToEditShow(show);
 				}
 			});
 		}
@@ -107,8 +121,7 @@ public class ShowSelectFragment extends Fragment
 		{
 			this.show = show;
 			title.setText(show.getTitle());
-			info.setText(show.getInfo());
+			isIncluded.setChecked(show.isIncluded());
 		}
 	}
-
 }

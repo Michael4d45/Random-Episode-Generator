@@ -229,7 +229,10 @@ public class ShowGenerator
 									case "title":
 										System.out.println("change title to...");
 										input = br.readLine();
-										show.setTitle(input);
+										if(!shows.changeShowTitle(show,input))
+										{
+											System.out.println("could not change the name");
+										}
 										break;
 									case "description":
 										System.out.println("change description to...");

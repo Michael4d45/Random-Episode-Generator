@@ -23,7 +23,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/horizontal_bar"
-        android:background="@color/horizontal_bar" />
+        android:layout_height="@dimen/bar"
+        android:background="@color/bar" />
 
 </LinearLayout>

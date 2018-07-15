@@ -1,4 +1,4 @@
-package com.episode.random.randomepisodegenerator;
+package com.episode.random.settings;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,15 +6,20 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.episode.random.randomepisodegenerator.R;
 
 import java.util.Vector;
 
@@ -24,7 +29,7 @@ import model.Season;
 import model.Show;
 import model.Shows;
 
-public class ShowFragment extends Fragment
+public class EditFragment extends Fragment
 {
 	private static final String SHOW = "com.episode.random.randomepisodegenerator.SHOW";
 	private static final String EPISODE = "com.episode.random.randomepisodegenerator.EPISODE";
@@ -32,13 +37,17 @@ public class ShowFragment extends Fragment
 
 	private int episode;
 	private int season;
-	private TextView seasonEpisodeNumber;
-	private TextView episodeTitle;
-	private TextView episodeDescription;
+	private EditText description;
+	private EditText title;
+	private EditText seasonNumber;
+	private EditText episodeNumber;
+	private EditText episodeTitle;
+	private EditText episodeDescription;
 
 	private Show show;
+	private boolean updating;
 
-	public ShowFragment()
+	public EditFragment()
 	{
 		// Required empty public constructor
 	}
@@ -48,11 +57,11 @@ public class ShowFragment extends Fragment
 	 * this fragment using the provided parameters.
 	 *
 	 * @param show the show.
-	 * @return A new instance of fragment ShowFragment.
+	 * @return A new instance of fragment EditFragment.
 	 */
-	public static ShowFragment newInstance(Show show)
+	public static EditFragment newInstance(Show show)
 	{
-		ShowFragment fragment = new ShowFragment();
+		EditFragment fragment = new EditFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(SHOW, show);
 		fragment.setArguments(args);
@@ -62,7 +71,7 @@ public class ShowFragment extends Fragment
 	public static Fragment newRandomInstance()
 	{
 		Show show = Shows.get().getRandomShow();
-		ShowFragment fragment = new ShowFragment();
+		EditFragment fragment = new EditFragment();
 		Bundle args = new Bundle();
 		if (show != null)
 			args.putSerializable(SHOW, show);
@@ -90,16 +99,20 @@ public class ShowFragment extends Fragment
 							 Bundle savedInstanceState)
 	{
 		// Inflate the layout for this fragment
-		View v = inflater.inflate(R.layout.fragment_show, container, false);
+		View v = inflater.inflate(R.layout.fragment_edit, container, false);
 
-		TextView title = (TextView) v.findViewById(R.id.show_title);
-		TextView description = (TextView) v.findViewById(R.id.show_description);
+		title = (EditText) v.findViewById(R.id.show_title);
+		description = (EditText) v.findViewById(R.id.show_description);
+
+		ExtendShowListener(title);
+		ExtendShowListener(description);
 
 		if (show != null)
 		{
 			title.setText(show.getTitle());
 			description.setText(show.getDescription());
 		}
+
 		RecyclerView seasonRecyclerView = (RecyclerView) v.findViewById(R.id.season_recycler_container);
 		seasonRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -110,27 +123,18 @@ public class ShowFragment extends Fragment
 			seasonRecyclerView.setAdapter(showAdapter);
 		}
 
-		Button random = (Button) v.findViewById(R.id.random_episode_button);
+		seasonNumber = (EditText) v.findViewById(R.id.season_number);
+		episodeNumber = (EditText) v.findViewById(R.id.episode_number);
+		episodeTitle = (EditText) v.findViewById(R.id.episode_title);
+		episodeDescription = (EditText) v.findViewById(R.id.episode_description);
 
-		random.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View view)
-			{
-				if (show != null)
-				{
-					Season season = show.getRandomSeason();
-					Episode episode = season.getRandomEpisode();
-					update(season, episode);
-				}
-			}
-		});
 
-		seasonEpisodeNumber = (TextView) v.findViewById(R.id.season_episode_number);
-		episodeTitle = (TextView) v.findViewById(R.id.episode_title);
-		episodeDescription = (TextView) v.findViewById(R.id.episode_description);
+		ExtendSeasonListener(seasonNumber);
+		ExtendEpisodeListener(episodeNumber);
+		ExtendEpisodeListener(episodeTitle);
+		ExtendEpisodeListener(episodeDescription);
 
-		if(show != null)
+		if (show != null)
 		{
 			Season tempSeason = show.getSeason(season);
 			if (tempSeason != null)
@@ -145,10 +149,13 @@ public class ShowFragment extends Fragment
 
 	private void update(Season season, Episode episode)
 	{
+		updating = true;
 		if (episode != null && getArguments() != null)
 		{
+
 			episodeTitle.setText(episode.getTitle());
 			episodeDescription.setText(episode.getDescription());
+
 			this.episode = episode.getEpisodeNum();
 			getArguments().putSerializable(EPISODE, this.episode);
 		}
@@ -158,12 +165,73 @@ public class ShowFragment extends Fragment
 			getArguments().putSerializable(SEASON, this.season);
 		}
 		if (season != null && episode != null)
-			seasonEpisodeNumber.setText(getSeasonEpisodeText());
+		{
+			seasonNumber.setText(Integer.toString(this.season));
+			episodeNumber.setText(Integer.toString(this.episode));
+		}
+
+		updating = false;
 	}
 
-	private String getSeasonEpisodeText()
+	private void updateShow()
 	{
-		return "Season " + season + ", Episode " + episode;
+		if (show != null)
+		{
+			if (!show.getTitle().equals(title.getText().toString()))
+				if (!Shows.get().changeShowTitle(show, title.getText().toString()))
+				{
+					Toast.makeText(getContext(), "couldn\'t update show title", Toast.LENGTH_SHORT).show();
+				}
+			show.setDescription(description.getText().toString());
+		}
+	}
+
+	private void updateSeason()
+	{
+		String num = seasonNumber.getText().toString();
+		if (show != null && !num.equals(""))
+		{
+			Season tempSeason = show.getSeason(season);
+			if (tempSeason != null)
+			{
+				int newNumber = Integer.parseInt(num);
+				if (tempSeason.getSeasonNum() != newNumber)
+					if (!show.changeNumber(tempSeason, newNumber))
+					{
+						Toast.makeText(getContext(), "couldn\'t update season", Toast.LENGTH_SHORT).show();
+					}
+
+			}
+		}
+	}
+
+	private void updateEpisode()
+	{
+		if ( show != null)
+		{
+			Season tempSeason = show.getSeason(season);
+			if (tempSeason != null)
+			{
+				Episode tempEpisode = tempSeason.getEpisode(episode);
+				if (tempEpisode != null)
+				{
+					String num = episodeNumber.getText().toString();
+					if(!num.equals(""))
+					{
+						int newNumber = (Integer.parseInt(num));
+						if (tempEpisode.getEpisodeNum() != newNumber)
+						{
+							if (!tempSeason.changeNumber(tempEpisode, newNumber))
+							{
+								//Toast.makeText(getContext(), "couldn\'t update episode number", Toast.LENGTH_SHORT).show();
+							}
+						}
+					}
+					tempEpisode.setTitle(episodeTitle.getText().toString());
+					tempEpisode.setDescription(episodeDescription.getText().toString());
+				}
+			}
+		}
 	}
 
 	private class ShowAdapter extends RecyclerView.Adapter<SeasonHolder>
@@ -205,7 +273,7 @@ public class ShowFragment extends Fragment
 
 		SeasonHolder(LayoutInflater inflater, ViewGroup parent)
 		{
-			super(inflater.inflate(R.layout.recycler_season, parent, false));
+			super(inflater.inflate(R.layout.recycler_season_edit, parent, false));
 			seasonNumber = (TextView) itemView.findViewById(R.id.season_number);
 			episodeGrid = (ExpandableHeightGridView) itemView.findViewById(R.id.episode_grid_container);
 			episodeGrid.setExpanded(true);
@@ -222,7 +290,7 @@ public class ShowFragment extends Fragment
 		public void bind(final Season season)
 		{
 			this.season = season;
-			String text = "Season " + season.getSeasonNum();
+			String text = "Season " + Integer.toString(season.getSeasonNum());
 			seasonNumber.setText(text);
 			episodes = season.getEpisodes();
 			episodeGrid.setAdapter(new EpisodeAdapter(getContext(), episodes));
@@ -274,6 +342,7 @@ public class ShowFragment extends Fragment
 				{
 					episodeLayout = (TextView) convertView;
 				}
+
 				String text = Integer.toString(episodes.elementAt(position).getEpisodeNum());
 				episodeLayout.setText(text);
 				return episodeLayout;
@@ -282,5 +351,85 @@ public class ShowFragment extends Fragment
 		}
 	}
 
+	/**
+	 * method for assigning listeners to views
+	 *
+	 * @param editText the view to update
+	 */
+	private void ExtendShowListener(EditText editText)
+	{
+		editText.addTextChangedListener(new TextWatcher()
+		{
+			@Override
+			public void afterTextChanged(Editable s)
+			{
+				updateShow();
+			}
 
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			{
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count)
+			{
+			}
+		});
+	}
+
+	/**
+	 * method for assigning listeners to views
+	 *
+	 * @param editText the view to update
+	 */
+	private void ExtendEpisodeListener(EditText editText)
+	{
+		editText.addTextChangedListener(new TextWatcher()
+		{
+			@Override
+			public void afterTextChanged(Editable s)
+			{
+				if (!updating)
+					updateEpisode();
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			{
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count)
+			{
+			}
+		});
+	}
+
+	/**
+	 * method for assigning listeners to views
+	 *
+	 * @param editText the view to update
+	 */
+	private void ExtendSeasonListener(final EditText editText)
+	{
+		editText.addTextChangedListener(new TextWatcher()
+		{
+			@Override
+			public void afterTextChanged(Editable s)
+			{
+				updateSeason();
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			{
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count)
+			{
+			}
+		});
+	}
 }

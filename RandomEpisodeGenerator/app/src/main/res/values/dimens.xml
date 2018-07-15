@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="fragment_margin">10dp</dimen>
-    <dimen name="horizontal_bar">1dp</dimen>
+    <dimen name="bar">1dp</dimen>
+    <dimen name="switch_margin">30dp</dimen>
 </resources>

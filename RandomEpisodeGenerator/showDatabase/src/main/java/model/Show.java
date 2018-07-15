@@ -8,6 +8,7 @@ import java.util.Vector;
 
 public class Show implements Serializable
 {
+	private boolean include = true;
 	private String title = "";
 	private String description = "";
 	private Map<Integer, Season> seasonsMap = new TreeMap<>();
@@ -120,8 +121,18 @@ public class Show implements Serializable
 		return s.toString();
 	}
 
+	public boolean isIncluded()
+	{
+		return include;
+	}
+
 	public String getDescription()
 	{
 		return description;
+	}
+
+	public void setIncluded(boolean included)
+	{
+		this.include = included;
 	}
 }

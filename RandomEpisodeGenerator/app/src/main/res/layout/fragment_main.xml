@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:orientation="vertical">
 
     <Button
         style="@style/MainButton"
-        android:id="@+id/select_show_button"
-        android:text="@string/select_show" />
-
-    <Button
-        style="@style/MainButton"
         android:id="@+id/random_show_button"
         android:text="@string/random_show" />
 
-    <Button
-        style="@style/MainButton"
-        android:id="@+id/edit_show_button"
-        android:text="@string/edit_database" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bar"
+        android:background="@color/bar" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/show_recycler_container"/>
 
 </LinearLayout>

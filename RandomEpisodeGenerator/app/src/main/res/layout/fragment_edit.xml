@@ -4,25 +4,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <EditText
+        android:id="@+id/show_title"
+        style="@style/ShowText"
+        android:text="@string/title" />
 
-        <TextView
-            android:id="@+id/show_title"
-            style="@style/Text"
-            android:text="@string/title" />
-
-        <Button
-            android:id="@+id/random_episode_button"
-            style="@style/MainButton"
-            android:text="@string/random_episode" />
-    </LinearLayout>
-
-    <TextView
+    <EditText
         android:id="@+id/show_description"
-        style="@style/Text"
+        style="@style/ShowText"
         android:text="@string/description" />
 
     <View
@@ -46,17 +35,38 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/season_episode_number"
-            style="@style/EpisodeText"
-            android:text="@string/season_episode_number" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <TextView
+            <TextView
+                style="@style/EpisodeText"
+                android:text="@string/season__number_edit" />
+
+            <EditText
+                android:id="@+id/season_number"
+                style="@style/EpisodeText"
+                android:inputType="numberDecimal"
+                android:text="@string/pound" />
+
+            <TextView
+                style="@style/EpisodeText"
+                android:text="@string/_episode_number_edit" />
+
+            <EditText
+                android:id="@+id/episode_number"
+                style="@style/EpisodeText"
+                android:inputType="numberDecimal"
+                android:text="@string/pound" />
+        </LinearLayout>
+
+        <EditText
             android:id="@+id/episode_title"
             style="@style/EpisodeText"
             android:text="@string/title" />
 
-        <TextView
+        <EditText
             android:id="@+id/episode_description"
             style="@style/EpisodeText"
             android:text="@string/description" />
