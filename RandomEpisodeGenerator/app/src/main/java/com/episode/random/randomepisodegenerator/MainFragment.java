@@ -24,12 +24,12 @@ import model.Shows;
 
 public class MainFragment extends Fragment
 {
+	RecyclerView showRecyclerView;
+
 	public MainFragment()
 	{
 		// Required empty public constructor
 	}
-
-	RecyclerView showRecyclerView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -61,6 +61,39 @@ public class MainFragment extends Fragment
 		return v;
 	}
 
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+	{
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.main_menu, menu);
+
+		MenuItem settings = (MenuItem) menu.findItem(R.id.action_settings);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		Intent intent;
+		switch (item.getItemId())
+		{
+			case R.id.action_settings:
+				intent = SettingsActivity.newIntent(getContext());
+				startActivity(intent);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
+	public void onResume()
+	{
+		super.onResume();
+		Vector<Show> shows = Shows.get().getShows();
+
+		ShowAdapter showAdapter = new ShowAdapter(shows);
+		showRecyclerView.setAdapter(showAdapter);
+	}
 
 	private class ShowAdapter extends RecyclerView.Adapter<ShowHolder>
 	{
@@ -121,39 +154,5 @@ public class MainFragment extends Fragment
 			title.setText(show.getTitle());
 			info.setText(show.getInfo());
 		}
-	}
-
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-	{
-		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.show_menu, menu);
-
-		MenuItem search = (MenuItem) menu.findItem(R.id.action_settings);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		Intent intent;
-		switch (item.getItemId())
-		{
-			case R.id.action_settings:
-				intent = SettingsActivity.newIntent(getContext());
-				startActivity(intent);
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
-	}
-
-	@Override
-	public void onResume()
-	{
-		super.onResume();
-		Vector<Show> shows = Shows.get().getShows();
-
-		ShowAdapter showAdapter = new ShowAdapter(shows);
-		showRecyclerView.setAdapter(showAdapter);
 	}
 }

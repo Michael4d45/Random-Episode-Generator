@@ -1,4 +1,4 @@
-package custom_views;
+package tools;
 
 
 import android.content.Context;
@@ -34,6 +34,11 @@ public class ExpandableHeightGridView extends GridView
 		return expanded;
 	}
 
+	public void setExpanded(boolean expanded)
+	{
+		this.expanded = expanded;
+	}
+
 	@Override
 	public void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
 	{
@@ -53,10 +58,5 @@ public class ExpandableHeightGridView extends GridView
 		{
 			super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		}
-	}
-
-	public void setExpanded(boolean expanded)
-	{
-		this.expanded = expanded;
 	}
 }

@@ -1,6 +1,18 @@
 package model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.Vector;
 
@@ -8,12 +20,62 @@ public class Shows
 {
 	private Map<String, Show> showsMap;
 	private static Shows sShows;
+	private static final String SHOW_FILE = "showDatabase/shows/shows.txt";
 
 	private Shows()
 	{
 		showsMap = new TreeMap<>();
 
 		//get shows
+		//generateRandom();
+	}
+
+	private void getShowsFromSavedData()
+	{
+		try
+		{
+			InputStream is = new FileInputStream(new File(SHOW_FILE));
+
+			String result = new Scanner(is).useDelimiter("\\A").next();
+
+			loadFromJson(result);
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public void loadFromJson(String json)
+	{
+		if(json.isEmpty())
+			return;
+		Gson gson = new Gson();
+		Type type = new TypeToken<Map<String, Show>>()
+		{
+		}.getType();
+		showsMap = gson.fromJson(json, type);
+	}
+
+	public void saveShowsToFile()
+	{
+		String json = getSaveShowsToFile();
+		try
+		{
+			File file = new File(SHOW_FILE);
+			FileWriter fileWriter = new FileWriter(file);
+			fileWriter.write(json);
+			fileWriter.flush();
+			fileWriter.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	private void generateRandom()
+	{
 		for (int i = 0; i < 10; i++)
 		{
 			Show show = new Show("bob " + i);
@@ -74,8 +136,8 @@ public class Shows
 	public Vector<Show> getShows()
 	{
 		Vector<Show> shows = new Vector<>();
-		for(Show show: showsMap.values())
-			if(show.isIncluded())
+		for (Show show : showsMap.values())
+			if (show.isIncluded())
 				shows.add(show);
 
 		return shows;
@@ -92,5 +154,22 @@ public class Shows
 			return false;
 		showsMap.remove(show);
 		return true;
+	}
+
+	public void addNew()
+	{
+		int num = 0;
+		while (!add("Untitled" + num++)) ;
+	}
+
+	public boolean remove(Show show)
+	{
+		return remove(show.getTitle());
+	}
+
+	public String getSaveShowsToFile()
+	{
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		return gson.toJson(showsMap);
 	}
 }

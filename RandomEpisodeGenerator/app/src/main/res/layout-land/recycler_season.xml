@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/season_recycler"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/season_recycler">
 
     <TextView
-        android:id="@+id/season_number"
         style="@style/Text"
-        android:text="@string/season" />
+        android:id="@+id/season_number"/>
 
-    <custom_views.ExpandableHeightGridView
+    <tools.ExpandableHeightGridView
         android:id="@+id/episode_grid_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:horizontalSpacing="2dp"
         android:isScrollContainer="false"
-        android:numColumns="4"
+        android:numColumns="8"
         android:stretchMode="columnWidth"
         android:verticalSpacing="10dp" />
 

@@ -4,13 +4,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <FrameLayout android:layout_height="wrap_content"
+    <FrameLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/show_title_button"
             style="@style/MainButton"
+            android:maxWidth="@dimen/setting_title_width"
             android:layout_gravity="start|center"
             android:text="@string/title" />
 
@@ -18,9 +20,17 @@
             android:id="@+id/show_included"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <ImageButton
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="end|center"
+            android:src="@drawable/ic_block_red_24dp"
             android:layout_marginEnd="@dimen/switch_margin"
-            android:layout_marginRight="@dimen/switch_margin" />
+            android:layout_marginRight="@dimen/switch_margin"/>
+
     </FrameLayout>
 
     <View

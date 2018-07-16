@@ -21,7 +21,7 @@
     </style>
 
     <style name="EpisodeText" parent="Text">
-        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_margin">3dp</item>
     </style>
 
     <style name="ShowText" parent="Text">

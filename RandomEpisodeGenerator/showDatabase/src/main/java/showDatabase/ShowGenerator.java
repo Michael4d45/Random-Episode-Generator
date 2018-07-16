@@ -36,6 +36,7 @@ public class ShowGenerator
 				System.out.println("\tedit a show? (edit)");
 				System.out.println("\tremove a show? (remove)");
 				System.out.println("\tget random? (random)");
+				System.out.println("\tsave? (save)");
 				System.out.println("\tleave? (end)");
 				input = br.readLine();
 
@@ -283,6 +284,10 @@ public class ShowGenerator
 						System.out.println(season.toString());
 						Episode episode = season.getRandomEpisode();
 						System.out.println(episode.toString());
+						break;
+					case "save":
+						System.out.println();
+						Shows.get().saveShowsToFile();
 						break;
 					case "end":
 						System.out.println("goodbye");

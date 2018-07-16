@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import java.util.Vector;
 
-import custom_views.ExpandableHeightGridView;
+import tools.ExpandableHeightGridView;
 import model.Episode;
 import model.Season;
 import model.Show;
@@ -26,9 +26,9 @@ import model.Shows;
 
 public class ShowFragment extends Fragment
 {
-	private static final String SHOW = "com.episode.random.randomepisodegenerator.SHOW";
-	private static final String EPISODE = "com.episode.random.randomepisodegenerator.EPISODE";
-	private static final String SEASON = "com.episode.random.randomepisodegenerator.SEASON";
+	private static final String SHOW = "com.episode.random.randomepisodegenerator.ShowFragment.SHOW";
+	private static final String EPISODE = "com.episode.random.randomepisodegenerator.ShowFragment.EPISODE";
+	private static final String SEASON = "com.episode.random.randomepisodegenerator.ShowFragment.SEASON";
 
 	private int episode;
 	private int season;
@@ -130,7 +130,7 @@ public class ShowFragment extends Fragment
 		episodeTitle = (TextView) v.findViewById(R.id.episode_title);
 		episodeDescription = (TextView) v.findViewById(R.id.episode_description);
 
-		if(show != null)
+		if (show != null)
 		{
 			Season tempSeason = show.getSeason(season);
 			if (tempSeason != null)

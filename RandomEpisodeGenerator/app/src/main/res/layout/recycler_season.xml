@@ -9,7 +9,7 @@
         style="@style/Text"
         android:id="@+id/season_number"/>
 
-    <custom_views.ExpandableHeightGridView
+    <tools.ExpandableHeightGridView
         android:id="@+id/episode_grid_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

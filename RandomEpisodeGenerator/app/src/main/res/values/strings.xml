@@ -13,5 +13,13 @@
     <string name="season__number_edit">Season </string>
     <string name="_episode_number_edit">, Episode </string>
     <string name="pound">#</string>
+    <string name="add">add</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="delete_confirmation">Are you sure you want to delete?</string>
+    <string name="delete">Delete</string>
+    <string name="add_episode">Add episode</string>
+    <string name="add_season">Add Season</string>
 
 </resources>

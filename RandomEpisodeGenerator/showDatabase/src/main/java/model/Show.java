@@ -135,4 +135,15 @@ public class Show implements Serializable
 	{
 		this.include = included;
 	}
+
+	public boolean remove(Season season)
+	{
+		return remove(season.getSeasonNum());
+	}
+
+	public void addNew()
+	{
+		int i = 0;
+		while(!addSeason(new Season(i++)));
+	}
 }

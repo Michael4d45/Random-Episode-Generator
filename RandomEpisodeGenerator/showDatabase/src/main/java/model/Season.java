@@ -114,4 +114,15 @@ public class Season implements Serializable
 	{
 		return episodesMap.keySet().size();
 	}
+
+	public boolean remove(Episode episode)
+	{
+		return remove(episode.getEpisodeNum());
+	}
+
+	public void addNew()
+	{
+		int i = 0;
+		while(!addEpisode(new Episode(i++)));
+	}
 }

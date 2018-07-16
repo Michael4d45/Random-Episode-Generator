@@ -1,9 +1,12 @@
 package com.episode.random.settings;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,7 +27,7 @@ import com.episode.random.randomepisodegenerator.R;
 
 import java.util.Vector;
 
-import custom_views.ExpandableHeightGridView;
+import tools.ExpandableHeightGridView;
 import model.Episode;
 import model.Season;
 import model.Show;
@@ -31,9 +35,21 @@ import model.Shows;
 
 public class EditFragment extends Fragment
 {
-	private static final String SHOW = "com.episode.random.randomepisodegenerator.SHOW";
-	private static final String EPISODE = "com.episode.random.randomepisodegenerator.EPISODE";
-	private static final String SEASON = "com.episode.random.randomepisodegenerator.SEASON";
+	private static final String SHOW = "com.episode.random.settings.EditFragment.SHOW";
+	private static final String EPISODE = "com.episode.random.settings.EditFragment.EPISODE";
+	private static final String SEASON = "com.episode.random.settings.EditFragment.SEASON";
+
+
+	private static final String DIALOG_EPISODE = "com.episode.random.settings.EditFragment.dialog.EPISODE";
+	private static final String DIALOG_SEASON = "com.episode.random.settings.EditFragment.dialog.SEASON";
+
+	private static final String DIALOG_DELETE_SEASON = "DIALOG_DELETE_SEASON";
+	private static final String DIALOG_DELETE_EPISODE = "DIALOG_DELETE_SEASON";
+
+	private static final int REQUEST_DELETE_SEASON = 0;
+	private static final int REQUEST_DELETE_EPISODE = 1;
+
+	RecyclerView seasonRecyclerView;
 
 	private int episode;
 	private int season;
@@ -43,6 +59,10 @@ public class EditFragment extends Fragment
 	private EditText episodeNumber;
 	private EditText episodeTitle;
 	private EditText episodeDescription;
+	private Button addSeason;
+	private Button deleteSeason;
+	private Button addEpisode;
+	private Button deleteEpisode;
 
 	private Show show;
 	private boolean updating;
@@ -104,35 +124,29 @@ public class EditFragment extends Fragment
 		title = (EditText) v.findViewById(R.id.show_title);
 		description = (EditText) v.findViewById(R.id.show_description);
 
-		ExtendShowListener(title);
-		ExtendShowListener(description);
-
 		if (show != null)
 		{
 			title.setText(show.getTitle());
 			description.setText(show.getDescription());
 		}
 
-		RecyclerView seasonRecyclerView = (RecyclerView) v.findViewById(R.id.season_recycler_container);
+		seasonRecyclerView = (RecyclerView) v.findViewById(R.id.season_recycler_container);
 		seasonRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-		if (show != null)
-		{
-			Vector<Season> seasons = show.getSeasons();
-			ShowAdapter showAdapter = new ShowAdapter(seasons);
-			seasonRecyclerView.setAdapter(showAdapter);
-		}
+		updateRecycler();
 
 		seasonNumber = (EditText) v.findViewById(R.id.season_number);
 		episodeNumber = (EditText) v.findViewById(R.id.episode_number);
 		episodeTitle = (EditText) v.findViewById(R.id.episode_title);
 		episodeDescription = (EditText) v.findViewById(R.id.episode_description);
 
+		addSeason = (Button) v.findViewById(R.id.add_season);
+		deleteSeason = (Button) v.findViewById(R.id.delete_season);
+		addEpisode = (Button) v.findViewById(R.id.add_episode);
+		deleteEpisode = (Button) v.findViewById(R.id.delete_episode);
 
-		ExtendSeasonListener(seasonNumber);
-		ExtendEpisodeListener(episodeNumber);
-		ExtendEpisodeListener(episodeTitle);
-		ExtendEpisodeListener(episodeDescription);
+		if (addSeason != null && deleteSeason != null && addEpisode != null && deleteEpisode != null)
+			setupButtons();
 
 		if (show != null)
 		{
@@ -144,7 +158,106 @@ public class EditFragment extends Fragment
 			}
 		}
 
+		ExtendShowListener(title);
+		ExtendShowListener(description);
+		ExtendSeasonListener(seasonNumber);
+		ExtendEpisodeListener(episodeNumber);
+		ExtendEpisodeListener(episodeTitle);
+		ExtendEpisodeListener(episodeDescription);
+
 		return v;
+	}
+
+	private void setupButtons()
+	{
+		addSeason.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				if (show != null)
+				{
+					show.addNew();
+					updateRecycler();
+				}
+			}
+		});
+
+		deleteSeason.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				if (show != null)
+				{
+					Season tempSeason = show.getSeason(season);
+					if (tempSeason != null)
+					{
+						FragmentManager manager = getFragmentManager();
+						DeleteDialog dialog = new DeleteDialog();
+						Intent intent = new Intent();
+						intent.putExtra(DIALOG_SEASON, tempSeason);
+						dialog.setIntent(intent);
+						dialog.setTargetFragment(EditFragment.this, REQUEST_DELETE_SEASON);
+						dialog.show(manager, DIALOG_DELETE_SEASON);
+					}
+				}
+			}
+		});
+
+		addEpisode.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				if (show != null)
+				{
+					Season tempSeason = show.getSeason(season);
+					if (tempSeason != null)
+					{
+						tempSeason.addNew();
+						updateRecycler();
+					}
+				}
+			}
+		});
+
+		deleteEpisode.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				if (show != null)
+				{
+					Season tempSeason = show.getSeason(season);
+					if (tempSeason != null)
+					{
+						Episode tempEpisode = tempSeason.getEpisode(episode);
+						if (tempEpisode != null)
+						{
+							FragmentManager manager = getFragmentManager();
+							DeleteDialog dialog = new DeleteDialog();
+							Intent intent = new Intent();
+							intent.putExtra(DIALOG_EPISODE, tempEpisode);
+							intent.putExtra(DIALOG_SEASON, tempSeason);
+							dialog.setIntent(intent);
+							dialog.setTargetFragment(EditFragment.this, REQUEST_DELETE_EPISODE);
+							dialog.show(manager, DIALOG_DELETE_EPISODE);
+						}
+					}
+				}
+			}
+		});
+	}
+
+	private void updateRecycler()
+	{
+		if (show != null)
+		{
+			Vector<Season> seasons = show.getSeasons();
+			ShowAdapter showAdapter = new ShowAdapter(seasons);
+			seasonRecyclerView.setAdapter(showAdapter);
+		}
 	}
 
 	private void update(Season season, Episode episode)
@@ -152,12 +265,18 @@ public class EditFragment extends Fragment
 		updating = true;
 		if (episode != null && getArguments() != null)
 		{
-
 			episodeTitle.setText(episode.getTitle());
 			episodeDescription.setText(episode.getDescription());
 
 			this.episode = episode.getEpisodeNum();
 			getArguments().putSerializable(EPISODE, this.episode);
+		}
+		else if(getArguments() != null)
+		{
+			episodeTitle.setText(R.string.title);
+			episodeDescription.setText(R.string.description);
+
+			getArguments().clear();
 		}
 		if (season != null && getArguments() != null)
 		{
@@ -169,6 +288,11 @@ public class EditFragment extends Fragment
 			seasonNumber.setText(Integer.toString(this.season));
 			episodeNumber.setText(Integer.toString(this.episode));
 		}
+		else if(season != null )
+		{
+			seasonNumber.setText(Integer.toString(this.season));
+			episodeNumber.setText(R.string.pound);
+		}
 
 		updating = false;
 	}
@@ -178,11 +302,16 @@ public class EditFragment extends Fragment
 		if (show != null)
 		{
 			if (!show.getTitle().equals(title.getText().toString()))
+			{
 				if (!Shows.get().changeShowTitle(show, title.getText().toString()))
 				{
 					Toast.makeText(getContext(), "couldn\'t update show title", Toast.LENGTH_SHORT).show();
 				}
-			show.setDescription(description.getText().toString());
+			}
+			if (!show.getDescription().equals(description.getText().toString()))
+			{
+				show.setDescription(description.getText().toString());
+			}
 		}
 	}
 
@@ -200,6 +329,8 @@ public class EditFragment extends Fragment
 					{
 						Toast.makeText(getContext(), "couldn\'t update season", Toast.LENGTH_SHORT).show();
 					}
+					else
+						updateRecycler();
 
 			}
 		}
@@ -207,7 +338,7 @@ public class EditFragment extends Fragment
 
 	private void updateEpisode()
 	{
-		if ( show != null)
+		if (show != null)
 		{
 			Season tempSeason = show.getSeason(season);
 			if (tempSeason != null)
@@ -216,7 +347,7 @@ public class EditFragment extends Fragment
 				if (tempEpisode != null)
 				{
 					String num = episodeNumber.getText().toString();
-					if(!num.equals(""))
+					if (!num.equals(""))
 					{
 						int newNumber = (Integer.parseInt(num));
 						if (tempEpisode.getEpisodeNum() != newNumber)
@@ -225,6 +356,8 @@ public class EditFragment extends Fragment
 							{
 								//Toast.makeText(getContext(), "couldn\'t update episode number", Toast.LENGTH_SHORT).show();
 							}
+							else
+								updateRecycler();
 						}
 					}
 					tempEpisode.setTitle(episodeTitle.getText().toString());
@@ -232,6 +365,90 @@ public class EditFragment extends Fragment
 				}
 			}
 		}
+	}
+
+	/**
+	 * method for assigning listeners to views
+	 *
+	 * @param editText the view to update
+	 */
+	private void ExtendShowListener(EditText editText)
+	{
+		editText.addTextChangedListener(new TextWatcher()
+		{
+			@Override
+			public void afterTextChanged(Editable s)
+			{
+				if (!updating)
+					updateShow();
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			{
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count)
+			{
+			}
+		});
+	}
+
+	/**
+	 * method for assigning listeners to views
+	 *
+	 * @param editText the view to update
+	 */
+	private void ExtendEpisodeListener(EditText editText)
+	{
+		editText.addTextChangedListener(new TextWatcher()
+		{
+			@Override
+			public void afterTextChanged(Editable s)
+			{
+				if (!updating)
+					updateEpisode();
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			{
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count)
+			{
+			}
+		});
+	}
+
+	/**
+	 * method for assigning listeners to views
+	 *
+	 * @param editText the view to update
+	 */
+	private void ExtendSeasonListener(final EditText editText)
+	{
+		editText.addTextChangedListener(new TextWatcher()
+		{
+			@Override
+			public void afterTextChanged(Editable s)
+			{
+				if (!updating)
+					updateSeason();
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			{
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count)
+			{
+			}
+		});
 	}
 
 	private class ShowAdapter extends RecyclerView.Adapter<SeasonHolder>
@@ -273,7 +490,7 @@ public class EditFragment extends Fragment
 
 		SeasonHolder(LayoutInflater inflater, ViewGroup parent)
 		{
-			super(inflater.inflate(R.layout.recycler_season_edit, parent, false));
+			super(inflater.inflate(R.layout.recycler_season, parent, false));
 			seasonNumber = (TextView) itemView.findViewById(R.id.season_number);
 			episodeGrid = (ExpandableHeightGridView) itemView.findViewById(R.id.episode_grid_container);
 			episodeGrid.setExpanded(true);
@@ -283,6 +500,14 @@ public class EditFragment extends Fragment
 										int position, long id)
 				{
 					update(season, episodes.elementAt(position));
+				}
+			});
+			seasonNumber.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View view)
+				{
+					update(season, null);
 				}
 			});
 		}
@@ -347,89 +572,58 @@ public class EditFragment extends Fragment
 				episodeLayout.setText(text);
 				return episodeLayout;
 			}
-
 		}
 	}
 
-	/**
-	 * method for assigning listeners to views
-	 *
-	 * @param editText the view to update
-	 */
-	private void ExtendShowListener(EditText editText)
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		editText.addTextChangedListener(new TextWatcher()
+		switch (requestCode)
 		{
-			@Override
-			public void afterTextChanged(Editable s)
-			{
-				updateShow();
-			}
+			case REQUEST_DELETE_EPISODE:
+				switch (resultCode)
+				{
+					case Activity.RESULT_CANCELED:
 
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
+						break;
+					case Activity.RESULT_OK:
+						if (data != null && data.hasExtra(DIALOG_EPISODE) && data.hasExtra(DIALOG_SEASON))
+						{
+							Season season = (Season) data.getSerializableExtra(DIALOG_SEASON);
+							if (season != null)
+							{
+								Episode episode = (Episode) data.getSerializableExtra(DIALOG_EPISODE);
+								if (episode != null && !season.remove(episode))
+								{
+									Toast.makeText(getContext(), "could not delete episode", Toast.LENGTH_SHORT).show();
+								}
+								else
+									updateRecycler();
+							}
+						}
+						break;
+				}
+				break;
+			case REQUEST_DELETE_SEASON:
+				switch (resultCode)
+				{
+					case Activity.RESULT_CANCELED:
 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-			}
-		});
-	}
-
-	/**
-	 * method for assigning listeners to views
-	 *
-	 * @param editText the view to update
-	 */
-	private void ExtendEpisodeListener(EditText editText)
-	{
-		editText.addTextChangedListener(new TextWatcher()
-		{
-			@Override
-			public void afterTextChanged(Editable s)
-			{
-				if (!updating)
-					updateEpisode();
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-			}
-		});
-	}
-
-	/**
-	 * method for assigning listeners to views
-	 *
-	 * @param editText the view to update
-	 */
-	private void ExtendSeasonListener(final EditText editText)
-	{
-		editText.addTextChangedListener(new TextWatcher()
-		{
-			@Override
-			public void afterTextChanged(Editable s)
-			{
-				updateSeason();
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-			}
-		});
+						break;
+					case Activity.RESULT_OK:
+						if (data != null && data.hasExtra(DIALOG_SEASON))
+						{
+							Season season = (Season) data.getSerializableExtra(DIALOG_SEASON);
+							if (season != null && !show.remove(season))
+							{
+								Toast.makeText(getContext(), "could not delete season", Toast.LENGTH_SHORT).show();
+							}
+							else
+								updateRecycler();
+						}
+						break;
+				}
+				break;
+		}
 	}
 }

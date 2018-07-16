@@ -1,0 +1,111 @@
+{
+  "A series of Unfortuante Events": {
+    "include": true,
+    "title": "A series of Unfortuante Events",
+    "description": "A sad tale of three children",
+    "seasonsMap": {
+      "1": {
+        "seasonNum": 1,
+        "description": "",
+        "episodesMap": {
+          "1": {
+            "title": "A bad beginning part 1",
+            "description": "Baudelaire children learn of thier parents deaths",
+            "episodeNum": 1
+          },
+          "2": {
+            "title": "A bad beginning part 2",
+            "description": "Bauldelair children learn to live with count olaf",
+            "episodeNum": 2
+          },
+          "3": {
+            "title": "The Reptile Room: Part One",
+            "description": "Montgomery Montgomery",
+            "episodeNum": 3
+          },
+          "4": {
+            "title": "The Reptile Room: Part Two",
+            "description": "Stephano",
+            "episodeNum": 4
+          },
+          "5": {
+            "title": "The Wide Window: Part One",
+            "description": "Aunt Josephine",
+            "episodeNum": 5
+          },
+          "6": {
+            "title": "The Wide Window: Part Two",
+            "description": "Captain Sham",
+            "episodeNum": 6
+          },
+          "7": {
+            "title": "The Miserable Mill: Part One",
+            "description": "Shirley St. Ives",
+            "episodeNum": 7
+          },
+          "8": {
+            "title": "The Miserable Mill: Part Two",
+            "description": " The Quagmires",
+            "episodeNum": 8
+          }
+        }
+      },
+      "2": {
+        "seasonNum": 2,
+        "description": "",
+        "episodesMap": {
+          "1": {
+            "title": "The Austere Academy: Part 1",
+            "description": "Prufrock Preparatory School",
+            "episodeNum": 1
+          },
+          "2": {
+            "title": "The Austere Academy: Part 2",
+            "description": "Lemony\u0027s brother, Jacques",
+            "episodeNum": 2
+          },
+          "3": {
+            "title": "The Ersatz Elevator: Part 1",
+            "description": " the Quagmires locked in a cage",
+            "episodeNum": 3
+          },
+          "4": {
+            "title": "The Ersatz Elevator: Part 2",
+            "description": "V.F.D.",
+            "episodeNum": 4
+          },
+          "5": {
+            "title": "The Vile Village: Part 1",
+            "description": "Village of Fowl Devotees",
+            "episodeNum": 5
+          },
+          "6": {
+            "title": "The Vile Village: Part 2",
+            "description": "Hector",
+            "episodeNum": 6
+          },
+          "7": {
+            "title": "The Hostile Hospital: Part 1",
+            "description": "Heimlich Hospital",
+            "episodeNum": 7
+          },
+          "8": {
+            "title": "The Hostile Hospital: Part 2",
+            "description": "Dr. Faustus",
+            "episodeNum": 8
+          },
+          "9": {
+            "title": "Carnivorous Carnival: Part 1",
+            "description": "Lulu",
+            "episodeNum": 9
+          },
+          "10": {
+            "title": "Carnivorous Carnival: Part 2",
+            "description": "Lemony Snicket ",
+            "episodeNum": 10
+          }
+        }
+      }
+    }
+  }
+}
