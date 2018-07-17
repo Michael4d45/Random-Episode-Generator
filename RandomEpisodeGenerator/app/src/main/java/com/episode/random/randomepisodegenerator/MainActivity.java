@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import model.Show;
-import model.Shows;
 import tools.ReadWriteShows;
 
 public class MainActivity extends AppCompatActivity
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		ReadWriteShows.loadShows(getBaseContext());
+		ReadWriteShows.loadShows(this);
 
 		Toolbar myToolbar = (Toolbar) findViewById(R.id.main_toolbar);
 

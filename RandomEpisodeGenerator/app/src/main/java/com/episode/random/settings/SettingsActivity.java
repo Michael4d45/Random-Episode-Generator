@@ -62,6 +62,6 @@ public class SettingsActivity extends AppCompatActivity
 	public void onDestroy()
 	{
 		super.onDestroy();
-		ReadWriteShows.saveShows(getBaseContext());
+		ReadWriteShows.saveShows(this);
 	}
 }

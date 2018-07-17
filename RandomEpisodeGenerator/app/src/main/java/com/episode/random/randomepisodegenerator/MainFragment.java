@@ -24,7 +24,8 @@ import model.Shows;
 
 public class MainFragment extends Fragment
 {
-	RecyclerView showRecyclerView;
+	private RecyclerView showRecyclerView;
+	private static MainFragment sMainFragment;
 
 	public MainFragment()
 	{
@@ -57,8 +58,21 @@ public class MainFragment extends Fragment
 				((MainActivity) getActivity()).switchToRandomShow();
 			}
 		});
-
+		sMainFragment = this;
 		return v;
+	}
+
+	public static MainFragment get()
+	{
+		return sMainFragment;
+	}
+
+	public void update()
+	{
+		Vector<Show> shows = Shows.get().getShows();
+
+		ShowAdapter showAdapter = new ShowAdapter(shows);
+		showRecyclerView.setAdapter(showAdapter);
 	}
 
 	@Override
@@ -89,10 +103,7 @@ public class MainFragment extends Fragment
 	public void onResume()
 	{
 		super.onResume();
-		Vector<Show> shows = Shows.get().getShows();
-
-		ShowAdapter showAdapter = new ShowAdapter(shows);
-		showRecyclerView.setAdapter(showAdapter);
+		update();
 	}
 
 	private class ShowAdapter extends RecyclerView.Adapter<ShowHolder>
