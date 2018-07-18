@@ -1,13 +1,18 @@
 package com.episode.random.settings;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +23,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.episode.random.randomepisodegenerator.R;
@@ -26,7 +32,7 @@ import java.util.Vector;
 
 import model.Show;
 import model.Shows;
-import tools.ReadWriteShows;
+import tools.MenuHelper;
 
 public class SettingsFragment extends Fragment
 {
@@ -77,20 +83,17 @@ public class SettingsFragment extends Fragment
 		inflater.inflate(R.menu.settings_menu, menu);
 
 		MenuItem add = (MenuItem) menu.findItem(R.id.action_new_show);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		switch (item.getItemId())
+		TextView textBtn = MenuHelper.getTextButton(getString(R.string.add), getResources().getDrawable(R.drawable.ic_add_black_24dp),getContext());
+		add.setActionView(textBtn);
+		textBtn.setOnClickListener(new View.OnClickListener()
 		{
-			case R.id.action_new_show:
+			@Override
+			public void onClick(View v)
+			{
 				Shows.get().addNew();
 				update();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
+			}
+		});
 	}
 
 	@Override
@@ -102,7 +105,6 @@ public class SettingsFragment extends Fragment
 				switch (resultCode)
 				{
 					case Activity.RESULT_CANCELED:
-
 						break;
 					case Activity.RESULT_OK:
 						if (data != null && data.hasExtra(SHOW))
@@ -110,7 +112,7 @@ public class SettingsFragment extends Fragment
 							Show show = (Show) data.getSerializableExtra(SHOW);
 							if (!Shows.get().remove(show))
 							{
-								Toast.makeText(getContext(), "could not delete show", Toast.LENGTH_SHORT).show();
+								Toast.makeText(getContext(), getString(R.string.delete_error), Toast.LENGTH_SHORT).show();
 							}
 							else
 								update();
@@ -182,7 +184,6 @@ public class SettingsFragment extends Fragment
 				}
 			});
 
-
 			delete.setOnClickListener(new View.OnClickListener()
 			{
 				@Override
@@ -197,8 +198,6 @@ public class SettingsFragment extends Fragment
 					dialog.show(manager, DIALOG_DELETE);
 				}
 			});
-
-
 		}
 
 		public void bind(final Show show)

@@ -105,8 +105,6 @@ public class ReadWriteShows
 
 	private static void update()
 	{
-		MainFragment mainFragment = MainFragment.get();
-		if(mainFragment != null)
-			mainFragment.update();
+		(MainActivity.getInstance()).update();
 	}
 }

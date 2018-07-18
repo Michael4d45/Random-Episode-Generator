@@ -1,4 +1,4 @@
-package com.episode.random.settings;
+package com.episode.random.randomepisodegenerator;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -12,12 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.episode.random.randomepisodegenerator.R;
-
-public class DeleteDialog extends DialogFragment
+public class ExitDialog extends DialogFragment
 {
-	private Intent intent;
-
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState)
@@ -25,11 +21,11 @@ public class DeleteDialog extends DialogFragment
 		View v = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_dialog, null);
 
 		TextView text = (TextView) v.findViewById(R.id.dialog_text);
-		text.setText(R.string.delete_confirmation);
+		text.setText(R.string.exit_dialog);
 
 		return new AlertDialog.Builder(getActivity())
 				.setView(v)
-				.setTitle(getString(R.string.delete))
+				.setTitle(R.string.exit)
 				.setNegativeButton(android.R.string.cancel,
 						new DialogInterface.OnClickListener()
 						{
@@ -57,18 +53,11 @@ public class DeleteDialog extends DialogFragment
 		super.onResume();
 	}
 
-	public void setIntent(Intent intent)
-	{
-		this.intent = intent;
-	}
-
 	private void sendResult(int resultCode)
 	{
 		if (getTargetFragment() == null)
-		{
 			return;
-		}
 
-		getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, intent);
+		getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, new Intent());
 	}
 }

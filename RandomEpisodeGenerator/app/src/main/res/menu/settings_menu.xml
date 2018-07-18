@@ -3,13 +3,12 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-
     tool:showIn="@layout/toolbar_main">
 
     <item
         android:icon="@drawable/ic_add_black_24dp"
         android:id="@+id/action_new_show"
         android:title="@string/add"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always|withText"/>
 
 </menu>

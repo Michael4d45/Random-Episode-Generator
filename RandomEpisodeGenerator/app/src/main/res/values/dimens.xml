@@ -4,4 +4,5 @@
     <dimen name="bar">1dp</dimen>
     <dimen name="switch_margin">30dp</dimen>
     <dimen name="setting_title_width">150dp</dimen>
+    <dimen name="edit_min_width">50dp</dimen>
 </resources>

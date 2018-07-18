@@ -3,7 +3,6 @@ package showDatabase;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Set;
 import java.util.Vector;
 
 import model.Episode;
@@ -15,9 +14,15 @@ public class ShowGenerator
 {
 	private static Shows shows = Shows.get();
 
+	private ShowGenerator()
+	{
+
+	}
+
 	/**
 	 * this is probably the worst case scenario of nesting, but
 	 * I don't really care
+	 *
 	 * @param args no purpose
 	 */
 	public static void main(String[] args)
@@ -208,7 +213,7 @@ public class ShowGenerator
 													input = getNumber(br);
 													if (input.equals("end"))
 														break;
-													if(!season.remove(Integer.parseInt(input)))
+													if (!season.remove(Integer.parseInt(input)))
 														System.out.println("could not remove that");
 													break;
 												case "end":
@@ -230,7 +235,7 @@ public class ShowGenerator
 									case "title":
 										System.out.println("change title to...");
 										input = br.readLine();
-										if(!shows.changeShowTitle(show,input))
+										if (!shows.changeShowTitle(show, input))
 										{
 											System.out.println("could not change the name");
 										}
@@ -246,7 +251,7 @@ public class ShowGenerator
 										input = getNumber(br);
 										if (input.equals("end"))
 											break;
-										if(!show.remove(Integer.parseInt(input)))
+										if (!show.remove(Integer.parseInt(input)))
 											System.out.println("could not remove that");
 										break;
 									case "end":
@@ -273,7 +278,7 @@ public class ShowGenerator
 					case "remove":
 						System.out.println("which show?:");
 						System.out.println(shows.getShows().toString());
-						if(!shows.remove(br.readLine()))
+						if (!shows.remove(br.readLine()))
 							System.out.println("could not remove that");
 						break;
 					case "random":
@@ -334,11 +339,6 @@ public class ShowGenerator
 		episode.setTitle(br.readLine());
 		System.out.println("add a description");
 		episode.setDescription(br.readLine());
-
-	}
-
-	private ShowGenerator()
-	{
 
 	}
 }

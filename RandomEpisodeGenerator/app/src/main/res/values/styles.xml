@@ -28,4 +28,13 @@
         <item name="android:layout_margin">5dp</item>
     </style>
 
+    <style name="EditButton" parent="MainButton">
+        <item name="android:layout_gravity">top|center</item>
+        <item name="android:layout_margin">0dp</item>
+    </style>
+
+    <style name="DeleteButton" parent="EditButton">
+        <item name="android:textSize">15sp</item>
+    </style>
+
 </resources>

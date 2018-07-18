@@ -6,6 +6,6 @@
 
     <TextView
         style="@style/Text"
-        android:text="@string/delete_confirmation" />
+        android:id="@+id/dialog_text" />
 
 </FrameLayout>

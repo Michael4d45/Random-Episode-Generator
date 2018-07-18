@@ -2,14 +2,21 @@ package model;
 
 import java.io.Serializable;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.Vector;
 
+/**
+ * represents a show object
+ * maintains a collection of Seasons
+ */
 public class Show implements Serializable
 {
+	//whether to include in main collection for app
 	private boolean include = true;
-	private String title = "";
+
+	private String title;
+
+	//TODO: may be removed if not being used
 	private String description = "";
 	private Map<Integer, Season> seasonsMap = new TreeMap<>();
 
@@ -20,7 +27,7 @@ public class Show implements Serializable
 
 	public Vector<Season> getSeasons()
 	{
-		return new Vector<Season>(seasonsMap.values());
+		return new Vector<>(seasonsMap.values());
 	}
 
 	@Override
@@ -53,16 +60,17 @@ public class Show implements Serializable
 		return getSeasons();
 	}
 
-	public void setDescription(String description)
-	{
-		this.description = description;
-	}
-
 	public Season getSeason(int i)
 	{
 		return seasonsMap.get(i);
 	}
 
+	/**
+	 * safely add a season to the Season collection
+	 *
+	 * @param season the season to add
+	 * @return whether the season was added
+	 */
 	public boolean addSeason(Season season)
 	{
 		if (season == null || seasonsMap.containsKey(season.getSeasonNum()))
@@ -71,6 +79,14 @@ public class Show implements Serializable
 		return true;
 	}
 
+	/**
+	 * safely change the number of the Season
+	 *
+	 * @param season    the season to change
+	 * @param newNumber the new number to change to
+	 * @return whether the season's number was changed
+	 */
+	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public boolean changeNumber(Season season, int newNumber)
 	{
 		if (season == null || seasonsMap.containsKey(newNumber) || !seasonsMap.containsKey(season.getSeasonNum()))
@@ -82,17 +98,23 @@ public class Show implements Serializable
 		return true;
 	}
 
-	public void setTitle(String title)
-	{
-		this.title = title;
-	}
-
+	/**
+	 * @return a random season from the collection of Seasons
+	 */
 	public Season getRandomSeason()
 	{
 		Vector<Season> seasons = getSeasons();
+		if (seasons.isEmpty())
+			return null;
 		return seasons.elementAt((int) (Math.random() * seasons.size()));
 	}
 
+	/**
+	 * remove the <i>i</i>th season
+	 *
+	 * @param i the number assigned for the season
+	 * @return whether the season was removed
+	 */
 	public boolean remove(int i)
 	{
 		if (!seasonsMap.containsKey(i))
@@ -107,6 +129,14 @@ public class Show implements Serializable
 		return title;
 	}
 
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
+
+	/**
+	 * @return info about the show for the app
+	 */
 	public String getInfo()
 	{
 		StringBuilder s = new StringBuilder();
@@ -126,14 +156,19 @@ public class Show implements Serializable
 		return include;
 	}
 
+	public void setIncluded(boolean included)
+	{
+		this.include = included;
+	}
+
 	public String getDescription()
 	{
 		return description;
 	}
 
-	public void setIncluded(boolean included)
+	public void setDescription(String description)
 	{
-		this.include = included;
+		this.description = description;
 	}
 
 	public boolean remove(Season season)
@@ -141,9 +176,13 @@ public class Show implements Serializable
 		return remove(season.getSeasonNum());
 	}
 
+	/**
+	 * add a new Season to the collection
+	 */
 	public void addNew()
 	{
-		int i = 0;
-		while(!addSeason(new Season(i++)));
+		int i = 1;
+		//noinspection StatementWithEmptyBody
+		while (!addSeason(new Season(i++))) ;
 	}
 }

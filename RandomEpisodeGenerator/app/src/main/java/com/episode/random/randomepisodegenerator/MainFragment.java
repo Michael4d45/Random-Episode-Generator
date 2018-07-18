@@ -21,11 +21,11 @@ import java.util.Vector;
 
 import model.Show;
 import model.Shows;
+import tools.MenuHelper;
 
 public class MainFragment extends Fragment
 {
 	private RecyclerView showRecyclerView;
-	private static MainFragment sMainFragment;
 
 	public MainFragment()
 	{
@@ -37,6 +37,7 @@ public class MainFragment extends Fragment
 	{
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+
 	}
 
 	@Override
@@ -58,15 +59,12 @@ public class MainFragment extends Fragment
 				((MainActivity) getActivity()).switchToRandomShow();
 			}
 		});
-		sMainFragment = this;
 		return v;
 	}
 
-	public static MainFragment get()
-	{
-		return sMainFragment;
-	}
-
+	/**
+	 * update the recycler view to display the shows
+	 */
 	public void update()
 	{
 		Vector<Show> shows = Shows.get().getShows();
@@ -82,21 +80,17 @@ public class MainFragment extends Fragment
 		inflater.inflate(R.menu.main_menu, menu);
 
 		MenuItem settings = (MenuItem) menu.findItem(R.id.action_settings);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		Intent intent;
-		switch (item.getItemId())
+		TextView textBtn = MenuHelper.getTextButton(getString(R.string.settings), getResources().getDrawable(R.drawable.ic_settings_black_24dp),getContext());
+		settings.setActionView(textBtn);
+		textBtn.setOnClickListener(new View.OnClickListener()
 		{
-			case R.id.action_settings:
-				intent = SettingsActivity.newIntent(getContext());
-				startActivity(intent);
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
+			@Override
+			public void onClick(View v)
+			{
+				startActivity(SettingsActivity.newIntent(getContext()));
+			}
+		});
+
 	}
 
 	@Override
@@ -106,6 +100,15 @@ public class MainFragment extends Fragment
 		update();
 	}
 
+	@Override
+	public void onDestroy()
+	{
+		super.onDestroy();
+	}
+
+	/**
+	 * recycler for a list of shows
+	 */
 	private class ShowAdapter extends RecyclerView.Adapter<ShowHolder>
 	{
 		private Vector<Show> shows;
@@ -165,5 +168,10 @@ public class MainFragment extends Fragment
 			title.setText(show.getTitle());
 			info.setText(show.getInfo());
 		}
+	}
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		((MainActivity) getActivity()).onActivityResult(requestCode, resultCode, data);
 	}
 }

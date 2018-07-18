@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 
+/**
+ * Represents an episode of a TV show
+ */
 public class Episode implements Serializable
 {
 	private String title = "";
@@ -18,9 +21,19 @@ public class Episode implements Serializable
 		return title;
 	}
 
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
+
 	public String getDescription()
 	{
 		return description;
+	}
+
+	public void setDescription(String description)
+	{
+		this.description = description;
 	}
 
 	public int getEpisodeNum()
@@ -44,16 +57,6 @@ public class Episode implements Serializable
 		s.append(description);
 		s.append("\n");
 		return s.toString();
-	}
-
-	public void setDescription(String description)
-	{
-		this.description = description;
-	}
-
-	public void setTitle(String title)
-	{
-		this.title = title;
 	}
 
 	public void setNumber(int number)

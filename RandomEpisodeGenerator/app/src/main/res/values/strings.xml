@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Random Episode Tool</string>
+    <string name="app_name">FlixBot</string>
 
     <string name="title">title</string>
     <string name="description">description</string>
@@ -15,11 +15,14 @@
     <string name="pound">#</string>
     <string name="add">add</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="delete_confirmation">Are you sure you want to delete?</string>
     <string name="delete">Delete</string>
     <string name="add_episode">Add episode</string>
     <string name="add_season">Add Season</string>
+    <string name="update_error">could not update</string>
+    <string name="delete_error">could not delete</string>
+    <string name="settings">Edit Shows </string>
+    <string name="exit_dialog">Are you sure you want to exit?</string>
+    <string name="exit">Exit</string>
 
 </resources>

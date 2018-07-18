@@ -28,6 +28,7 @@ public class SettingsActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
+
 		fm = getSupportFragmentManager();
 
 		Toolbar myToolbar = (Toolbar) findViewById(R.id.main_toolbar);

@@ -39,7 +39,6 @@ public class EditFragment extends Fragment
 	private static final String EPISODE = "com.episode.random.settings.EditFragment.EPISODE";
 	private static final String SEASON = "com.episode.random.settings.EditFragment.SEASON";
 
-
 	private static final String DIALOG_EPISODE = "com.episode.random.settings.EditFragment.dialog.EPISODE";
 	private static final String DIALOG_SEASON = "com.episode.random.settings.EditFragment.dialog.SEASON";
 
@@ -53,7 +52,6 @@ public class EditFragment extends Fragment
 
 	private int episode;
 	private int season;
-	private EditText description;
 	private EditText title;
 	private EditText seasonNumber;
 	private EditText episodeNumber;
@@ -122,12 +120,10 @@ public class EditFragment extends Fragment
 		View v = inflater.inflate(R.layout.fragment_edit, container, false);
 
 		title = (EditText) v.findViewById(R.id.show_title);
-		description = (EditText) v.findViewById(R.id.show_description);
 
 		if (show != null)
 		{
 			title.setText(show.getTitle());
-			description.setText(show.getDescription());
 		}
 
 		seasonRecyclerView = (RecyclerView) v.findViewById(R.id.season_recycler_container);
@@ -159,7 +155,6 @@ public class EditFragment extends Fragment
 		}
 
 		ExtendShowListener(title);
-		ExtendShowListener(description);
 		ExtendSeasonListener(seasonNumber);
 		ExtendEpisodeListener(episodeNumber);
 		ExtendEpisodeListener(episodeTitle);
@@ -305,12 +300,8 @@ public class EditFragment extends Fragment
 			{
 				if (!Shows.get().changeShowTitle(show, title.getText().toString()))
 				{
-					Toast.makeText(getContext(), "couldn\'t update show title", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getContext(), getString(R.string.update_error), Toast.LENGTH_SHORT).show();
 				}
-			}
-			if (!show.getDescription().equals(description.getText().toString()))
-			{
-				show.setDescription(description.getText().toString());
 			}
 		}
 	}
@@ -327,7 +318,7 @@ public class EditFragment extends Fragment
 				if (tempSeason.getSeasonNum() != newNumber)
 					if (!show.changeNumber(tempSeason, newNumber))
 					{
-						Toast.makeText(getContext(), "couldn\'t update season", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getContext(), getString(R.string.update_error), Toast.LENGTH_SHORT).show();
 					}
 					else
 						updateRecycler();
@@ -515,7 +506,7 @@ public class EditFragment extends Fragment
 		public void bind(final Season season)
 		{
 			this.season = season;
-			String text = "Season " + Integer.toString(season.getSeasonNum());
+			String text = getString(R.string.season) + Integer.toString(season.getSeasonNum());
 			seasonNumber.setText(text);
 			episodes = season.getEpisodes();
 			episodeGrid.setAdapter(new EpisodeAdapter(getContext(), episodes));
@@ -595,7 +586,7 @@ public class EditFragment extends Fragment
 								Episode episode = (Episode) data.getSerializableExtra(DIALOG_EPISODE);
 								if (episode != null && !season.remove(episode))
 								{
-									Toast.makeText(getContext(), "could not delete episode", Toast.LENGTH_SHORT).show();
+									Toast.makeText(getContext(), getString(R.string.delete_error), Toast.LENGTH_SHORT).show();
 								}
 								else
 									updateRecycler();
@@ -616,7 +607,7 @@ public class EditFragment extends Fragment
 							Season season = (Season) data.getSerializableExtra(DIALOG_SEASON);
 							if (season != null && !show.remove(season))
 							{
-								Toast.makeText(getContext(), "could not delete season", Toast.LENGTH_SHORT).show();
+								Toast.makeText(getContext(), getString(R.string.delete_error), Toast.LENGTH_SHORT).show();
 							}
 							else
 								updateRecycler();

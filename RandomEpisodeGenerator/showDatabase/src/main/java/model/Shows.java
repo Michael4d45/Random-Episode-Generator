@@ -16,11 +16,14 @@ import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.Vector;
 
+/**
+ * the collection of shows is maintained here
+ */
 public class Shows
 {
-	private Map<String, Show> showsMap;
-	private static Shows sShows;
 	private static final String SHOW_FILE = "showDatabase/shows/shows.txt";
+	private static Shows sShows;
+	private Map<String, Show> showsMap;
 
 	private Shows()
 	{
@@ -30,6 +33,23 @@ public class Shows
 		//generateRandom();
 	}
 
+	/**
+	 * this is a singleton getter
+	 *
+	 * @return shows singleton reference
+	 */
+	public static Shows get()
+	{
+		if (sShows == null)
+			sShows = new Shows();
+		return sShows;
+	}
+
+	/**
+	 * for testing, can't use this inside the app, since you need to do android
+	 * magic to do file things there, look at the tools.ReadWriteShows class in the
+	 * app module
+	 */
 	private void getShowsFromSavedData()
 	{
 		try
@@ -46,9 +66,15 @@ public class Shows
 		}
 	}
 
+	/**
+	 * this turns a json string to the show collection object
+	 * if it's not in the right format, it may not work
+	 *
+	 * @param json the string to load
+	 */
 	public void loadFromJson(String json)
 	{
-		if(json.isEmpty())
+		if (json.isEmpty())
 			return;
 		Gson gson = new Gson();
 		Type type = new TypeToken<Map<String, Show>>()
@@ -74,6 +100,9 @@ public class Shows
 		}
 	}
 
+	/**
+	 * for testing, when I didn't want to write out a bunch of shows
+	 */
 	private void generateRandom()
 	{
 		for (int i = 0; i < 10; i++)
@@ -94,13 +123,14 @@ public class Shows
 		}
 	}
 
-	public static Shows get()
-	{
-		if (sShows == null)
-			sShows = new Shows();
-		return sShows;
-	}
-
+	/**
+	 * a safe method of changing the show title
+	 * we don't want shows with the same title
+	 *
+	 * @param show    the show to manipulate
+	 * @param newName the new name of the show
+	 * @return whether the title was changed
+	 */
 	public boolean changeShowTitle(Show show, String newName)
 	{
 		if (newName == null || show == null || newName.equals("") || showsMap.containsKey(newName))
@@ -111,6 +141,12 @@ public class Shows
 		return true;
 	}
 
+	/**
+	 * a safe method of adding shows
+	 *
+	 * @param title the title of the new show
+	 * @return whether the show was created and added
+	 */
 	public boolean add(String title)
 	{
 		if (title == null || title.equals("") || showsMap.containsKey(title))
@@ -120,11 +156,22 @@ public class Shows
 		return true;
 	}
 
-	public Show getShow(String input)
+	/**
+	 * get show by title
+	 *
+	 * @param title the title of the show you want
+	 * @return the Show
+	 */
+	public Show getShow(String title)
 	{
-		return showsMap.get(input);
+		return showsMap.get(title);
 	}
 
+	/**
+	 * get a randomly generated show
+	 *
+	 * @return the randomly generated show
+	 */
 	public Show getRandomShow()
 	{
 		Vector<Show> shows = getShows();
@@ -133,6 +180,11 @@ public class Shows
 		return shows.elementAt((int) (shows.size() * Math.random()));
 	}
 
+	/**
+	 * get a Vector of shows if they are to be <i>included</i>
+	 *
+	 * @return the show Vector
+	 */
 	public Vector<Show> getShows()
 	{
 		Vector<Show> shows = new Vector<>();
@@ -143,11 +195,20 @@ public class Shows
 		return shows;
 	}
 
+	/**
+	 * @return the entire collection of shows as a Vector
+	 */
 	public Vector<Show> getAllShows()
 	{
 		return new Vector<>(showsMap.values());
 	}
 
+	/**
+	 * remove a show by title
+	 *
+	 * @param show title of show
+	 * @return whether the show was removed
+	 */
 	public boolean remove(String show)
 	{
 		if (show == null || show.equals("") || !showsMap.containsKey(show))
@@ -156,17 +217,32 @@ public class Shows
 		return true;
 	}
 
+	/**
+	 * add new shows with "Untitled" + increasing number to keep them unique
+	 */
 	public void addNew()
 	{
 		int num = 0;
+		//noinspection StatementWithEmptyBody
 		while (!add("Untitled" + num++)) ;
 	}
 
+	/**
+	 * remove a show
+	 *
+	 * @param show show to be removed
+	 * @return whether the show was removed
+	 */
 	public boolean remove(Show show)
 	{
 		return remove(show.getTitle());
 	}
 
+	/**
+	 * turn the data into a json string
+	 *
+	 * @return json data
+	 */
 	public String getSaveShowsToFile()
 	{
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();

@@ -23,12 +23,8 @@
                 android:id="@+id/show_title"
                 style="@style/ShowText"
                 android:maxWidth="200dp"
+                android:minWidth="@dimen/edit_min_width"
                 android:text="@string/title" />
-
-            <EditText
-                android:id="@+id/show_description"
-                style="@style/ShowText"
-                android:text="@string/description" />
         </LinearLayout>
 
         <LinearLayout
@@ -39,18 +35,23 @@
 
             <Button
                 android:id="@+id/add_season"
-                style="@style/EpisodeText"
+                style="@style/EditButton"
                 android:text="@string/add_season" />
 
 
             <Button
                 android:id="@+id/delete_season"
-                style="@style/EpisodeText"
+                style="@style/DeleteButton"
                 android:text="@string/delete" />
 
         </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bar"
+        android:background="@color/bar" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/season_recycler_container"
@@ -103,11 +104,13 @@
             <EditText
                 android:id="@+id/episode_title"
                 style="@style/EpisodeText"
+                android:minWidth="@dimen/edit_min_width"
                 android:text="@string/title" />
 
             <EditText
                 android:id="@+id/episode_description"
                 style="@style/EpisodeText"
+                android:minWidth="@dimen/edit_min_width"
                 android:text="@string/description" />
 
         </LinearLayout>
@@ -119,13 +122,13 @@
 
             <Button
                 android:id="@+id/add_episode"
-                style="@style/EpisodeText"
+                style="@style/EditButton"
                 android:text="@string/add_episode" />
 
 
             <Button
                 android:id="@+id/delete_episode"
-                style="@style/EpisodeText"
+                style="@style/DeleteButton"
                 android:text="@string/delete" />
 
         </LinearLayout>

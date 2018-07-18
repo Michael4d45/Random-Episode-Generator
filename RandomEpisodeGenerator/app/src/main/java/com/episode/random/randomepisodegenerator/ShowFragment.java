@@ -44,10 +44,7 @@ public class ShowFragment extends Fragment
 	}
 
 	/**
-	 * Use this factory method to create a new instance of
-	 * this fragment using the provided parameters.
-	 *
-	 * @param show the show.
+	 * @param show the show for the fragment.
 	 * @return A new instance of fragment ShowFragment.
 	 */
 	public static ShowFragment newInstance(Show show)
@@ -93,13 +90,10 @@ public class ShowFragment extends Fragment
 		View v = inflater.inflate(R.layout.fragment_show, container, false);
 
 		TextView title = (TextView) v.findViewById(R.id.show_title);
-		TextView description = (TextView) v.findViewById(R.id.show_description);
 
 		if (show != null)
-		{
 			title.setText(show.getTitle());
-			description.setText(show.getDescription());
-		}
+
 		RecyclerView seasonRecyclerView = (RecyclerView) v.findViewById(R.id.season_recycler_container);
 		seasonRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -120,8 +114,11 @@ public class ShowFragment extends Fragment
 				if (show != null)
 				{
 					Season season = show.getRandomSeason();
-					Episode episode = season.getRandomEpisode();
-					update(season, episode);
+					if(season != null)
+					{
+						Episode episode = season.getRandomEpisode();
+						update(season, episode);
+					}
 				}
 			}
 		});
@@ -139,10 +136,14 @@ public class ShowFragment extends Fragment
 				update(tempSeason, tempEpisode);
 			}
 		}
-
 		return v;
 	}
 
+	/**
+	 * update the information on the textViews
+	 * @param season the season
+	 * @param episode the episode
+	 */
 	private void update(Season season, Episode episode)
 	{
 		if (episode != null && getArguments() != null)
@@ -158,12 +159,10 @@ public class ShowFragment extends Fragment
 			getArguments().putSerializable(SEASON, this.season);
 		}
 		if (season != null && episode != null)
-			seasonEpisodeNumber.setText(getSeasonEpisodeText());
-	}
-
-	private String getSeasonEpisodeText()
-	{
-		return "Season " + season + ", Episode " + episode;
+		{
+			String seasonEpisodeText =  getString(R.string.season__number_edit) + season +  getString(R.string._episode_number_edit) + episode;
+			seasonEpisodeNumber.setText(seasonEpisodeText);
+		}
 	}
 
 	private class ShowAdapter extends RecyclerView.Adapter<SeasonHolder>
@@ -222,7 +221,7 @@ public class ShowFragment extends Fragment
 		public void bind(final Season season)
 		{
 			this.season = season;
-			String text = "Season " + season.getSeasonNum();
+			String text = getString(R.string.season) + season.getSeasonNum();
 			seasonNumber.setText(text);
 			episodes = season.getEpisodes();
 			episodeGrid.setAdapter(new EpisodeAdapter(getContext(), episodes));
@@ -281,6 +280,4 @@ public class ShowFragment extends Fragment
 
 		}
 	}
-
-
 }
