@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="showDatabase">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../RandomEpisodeGenerator/showDatabase" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../RandomEpisodeGenerator/showDatabase/src/main/java" />
+    </SOURCES>
+  </library>
+</component>
