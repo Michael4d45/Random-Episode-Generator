@@ -2,7 +2,9 @@ package server;
 
 import com.sun.net.httpserver.HttpServer;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 
 import handlers.DefaultHandler;
@@ -28,8 +30,7 @@ public class Server
             server = HttpServer.create(
                     new InetSocketAddress(Integer.parseInt(portNumber)),
                     MAX_WAITING_CONNECTIONS);
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
             e.printStackTrace();
             return;
@@ -49,6 +50,24 @@ public class Server
         server.start();
 
         System.out.println("Server started");
+
+        String input = "";
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        while (!input.equals("end"))
+        {
+            try
+            {
+                input = br.readLine();
+                if (input.equals("end"))
+                {
+                    server.stop(0);
+                }
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 }
 

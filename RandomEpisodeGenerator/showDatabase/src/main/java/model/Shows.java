@@ -22,7 +22,10 @@ import java.util.Vector;
 public class Shows
 {
 	private static final String SHOW_FILE = "showDatabase/shows/shows.txt";
+
 	private static Shows sShows;
+
+	//key is show title
 	private Map<String, Show> showsMap;
 
 	private Shows()

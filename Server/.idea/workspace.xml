@@ -2,25 +2,127 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a61a922d-19d1-4fd3-9887-8cf803ac82e7" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomEpisodeGenerator/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomEpisodeGenerator/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomEpisodeGenerator/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/androidTest/java/com/episode/random/randomepisodegenerator/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/ic_launcher-web.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/java/com/episode/random/randomepisodegenerator/ExitDialog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/java/com/episode/random/randomepisodegenerator/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/java/com/episode/random/randomepisodegenerator/MainFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/java/com/episode/random/randomepisodegenerator/ShowFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/java/com/episode/random/settings/DeleteDialog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/java/com/episode/random/settings/EditFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/java/com/episode/random/settings/SettingsActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/java/com/episode/random/settings/SettingsFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/java/tools/ExpandableHeightGridView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/java/tools/MenuHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/java/tools/ReadWriteShows.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/drawable/ic_add_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/drawable/ic_block_red_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/drawable/ic_settings_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout-land/fragment_edit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout-land/fragment_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout-land/fragment_show.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout-land/recycler_season.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout/activity_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout/fragment_dialog.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout/fragment_edit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout/fragment_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout/fragment_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout/fragment_show.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout/recycler_season.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout/recycler_show.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout/recycler_show_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/layout/toolbar_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/menu/back_menu.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/menu/main_menu.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/menu/settings_menu.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/values/dimens.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/values/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/app/src/test/java/com/episode/random/randomepisodegenerator/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomEpisodeGenerator/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomEpisodeGenerator/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomEpisodeGenerator/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/showDatabase/shows/shows.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomEpisodeGenerator/showDatabase/shows/shows.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/showDatabase/src/main/java/model/Season.java" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomEpisodeGenerator/showDatabase/src/main/java/model/Season.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/showDatabase/src/main/java/model/Show.java" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomEpisodeGenerator/showDatabase/src/main/java/model/Show.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomEpisodeGenerator/showDatabase/src/main/java/model/Shows.java" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomEpisodeGenerator/showDatabase/src/main/java/model/Shows.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Server.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-223181490">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="91" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="91" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="2" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Server.java" pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/server/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="563">
-              <caret line="45" selection-start-line="45" selection-end-line="45" />
+            <state relative-caret-position="168">
+              <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -28,7 +130,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultHandler.java" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/jdk.httpserver/com/sun/net/httpserver/HttpServer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="388">
+              <caret line="195" column="25" selection-start-line="195" selection-start-column="25" selection-end-line="195" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/handlers/DefaultHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2266">
@@ -71,9 +182,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -139,17 +248,29 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="showDatabase" type="70bed36:NamedLibraryElementNode" />
+              <item name="showDatabase" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="showDatabase" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1532876769486" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../RandomEpisodeGenerator/showDatabase" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -180,47 +301,29 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
       <properties />
       <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
   </component>
   <component name="SvnConfiguration">
@@ -238,53 +341,56 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32943678" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.3286334" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.3991323" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50053304" side_tool="true" weight="0.3991323" />
+      <window_info anchor="bottom" id="Messages" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/server/Server.java</url>
+          <line>63</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/server/Server.java">
+    <entry file="file://$PROJECT_DIR$/web/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/handlers/DefaultHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2442">
-          <caret line="111" lean-forward="true" selection-start-line="111" selection-end-line="111" />
+        <state relative-caret-position="154">
+          <caret line="13" column="21" lean-forward="true" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -295,17 +401,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/css/main.css">
+    <entry file="file://$PROJECT_DIR$/../RandomEpisodeGenerator/showDatabase/src/main/java/showDatabase/ShowGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
-          <caret line="13" column="21" lean-forward="true" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/jdk.httpserver/com/sun/net/httpserver/HttpServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="195" column="25" selection-start-line="195" selection-start-column="25" selection-end-line="195" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        <state relative-caret-position="168">
+          <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -376,6 +489,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
+          <last-edited>showDatabase</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

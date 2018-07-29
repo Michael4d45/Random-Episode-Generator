@@ -23,7 +23,6 @@ public class Season implements Serializable
 		seasonNum = i;
 	}
 
-
 	public Vector<Episode> getEpisodes()
 	{
 		return new Vector<Episode>(episodesMap.values());

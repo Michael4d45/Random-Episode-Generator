@@ -18,6 +18,7 @@ public class Show implements Serializable
 
 	//TODO: may be removed if not being used
 	private String description = "";
+
 	private Map<Integer, Season> seasonsMap = new TreeMap<>();
 
 	public Show(String title)
