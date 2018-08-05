@@ -1,0 +1,45 @@
+Initializing HTTP Server
+Starting server
+Server started
+default handle 0
+is get
+./web/index.html/
+default handle 1
+is get
+./web/css/main.css
+default handle 2
+is get
+./web/index.html/
+default handle 3
+is get
+./web/css/main.css
+default handle 4
+is get
+./web/index.html/
+default handle 5
+is get
+./web/css/main.css
+default handle 6
+is get
+./web/index.html/
+default handle 7
+is get
+./web/css/main.css
+default handle 8
+is get
+./web/index.html/
+default handle 9
+is get
+./web/css/main.css
+default handle 10
+is get
+./web/index.html/
+default handle 11
+is get
+./web/css/main.css
+default handle 12
+is get
+./web/index.html/
+default handle 13
+is get
+./web/css/main.css

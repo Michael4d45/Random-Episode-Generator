@@ -50,24 +50,6 @@ public class Server
         server.start();
 
         System.out.println("Server started");
-
-        String input = "";
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        while (!input.equals("end"))
-        {
-            try
-            {
-                input = br.readLine();
-                if (input.equals("end"))
-                {
-                    server.stop(0);
-                }
-            } catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
     }
 }
 
